@@ -6,6 +6,7 @@ import LatestProduct from "../latest-product";
 import styles from "./LatestProducts.module.scss";
 import Slider from "react-slick";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
+import LastProductsType from '@/types/lastProductsTypes';
 
 const LatestProducts = () => {
   const { data, getData } = useLastProducts();
@@ -51,10 +52,11 @@ const LatestProducts = () => {
   useEffect(() => {
     getData();
   }, [getData]);
+  console.log(data)
   return (
     <div className={styles.latest_products}>
       <Slider {...settings}>
-      {data.map(prod => <LatestProduct key={prod?._id} {...prod}  />)}
+      {data.map((prod: LastProductsType) => <LatestProduct key={prod?._id} {...prod}  />)}
       </Slider>
     </div>
   );

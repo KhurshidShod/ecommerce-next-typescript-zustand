@@ -4,6 +4,7 @@ import { devtools } from "zustand/middleware";
 import crud from "./crud";
 import LastProductsType from "@/types/lastProductsTypes";
 import { persist } from "zustand/middleware";
+import Category from "@/types/Category";
 
 interface CategoryState {
   loading: boolean;
