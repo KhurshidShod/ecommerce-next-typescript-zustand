@@ -132,6 +132,11 @@ export default function Layout({
                 </svg>
               </Link>
               <div className={styles.actions}>
+                <ul>
+                  <li><Link href='#'>All products</Link></li>
+                  <li><Link href="#">About</Link></li>
+                  <li><Link href="#">Contact</Link></li>
+                </ul>
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

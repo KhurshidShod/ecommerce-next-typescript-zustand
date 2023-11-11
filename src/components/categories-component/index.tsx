@@ -5,7 +5,7 @@ import useCategories from "@/store/categories";
 import styles from "./Categories.module.scss";
 import CategoryCard from "../category";
 import Slider from "react-slick";
-import { LuMoveLeft, LuMoveRight } from "react-icons/lu";
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 
 const CategoriesComp = () => {
   const { getCategories, categories, loading } = useCategories();
@@ -17,8 +17,16 @@ const CategoriesComp = () => {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    nextArrow: <LuMoveRight />,
-    prevArrow: <LuMoveLeft />,
+    nextArrow: (
+      <button>
+        <HiOutlineChevronRight />
+      </button>
+    ),
+    prevArrow: (
+      <button>
+        <HiOutlineChevronLeft />
+      </button>
+    ),
     draggable: true,
 
     responsive: [

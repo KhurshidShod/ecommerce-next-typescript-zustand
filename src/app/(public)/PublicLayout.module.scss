@@ -41,7 +41,41 @@
     }
     .actions {
       display: flex;
+      align-items: center;
       gap: 1rem;
+      ul{
+        li{
+          float: left;
+          margin-left: 10px;
+          list-style: none;
+          padding: 5px;
+          position: relative;
+          &::before{
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 1.5px;
+            background-color: var(--blue);
+            border-radius: 25px;
+            transition: .2s linear;
+          }
+          &:hover::before{
+            width: 100%;
+          }
+          &:hover{
+            a{
+              color: var(--blue)
+            }
+          }
+          a{
+            text-decoration: none;
+            color: var(--grey-font)
+          }
+        }
+      }
       div {
         display: flex;
         justify-content: center;

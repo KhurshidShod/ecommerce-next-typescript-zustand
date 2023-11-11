@@ -25,16 +25,26 @@
   padding-right: 20px;
 }
 .slick-arrow{
-  width: 50px !important;
-  height: 50px !important;
+  width: 75px !important;
+  height: 75px !important;
+  border-radius: 50% !important;
+  border: 8px solid var(--white) !important;
+  background-color: #F3F9FB !important;
+  font-size: 24px !important;
   color: var(--blue) !important;
-  border-radius: 50%;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center;
+  cursor: pointer !important;
   z-index: 9;
-  background-color: transparent;
+}
+.slick-arrow:before{
+  display: none !important;
 }
 .slick-next{
-  right: -10px !important;
+  right: -65px !important;
 }
 .slick-prev{
-  left: -10px !important;
+  left: -65px !important;
 }

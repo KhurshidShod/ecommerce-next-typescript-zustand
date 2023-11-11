@@ -5,7 +5,7 @@ import useLastProducts from "@/store/products";
 import LatestProduct from "../latest-product";
 import styles from "./LatestProducts.module.scss";
 import Slider from "react-slick";
-import { LuMoveRight, LuMoveLeft } from 'react-icons/lu'
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 
 const LatestProducts = () => {
   const { data, getData } = useLastProducts();
@@ -18,8 +18,8 @@ const LatestProducts = () => {
     slidesToScroll: 1,
     autoplay: true,
     draggable: true,
-    nextArrow: <LuMoveRight />,
-    prevArrow: <LuMoveLeft />,
+    nextArrow: <button><HiOutlineChevronRight /></button>,
+    prevArrow: <button><HiOutlineChevronLeft /></button>,
     responsive: [
       {
         breakpoint: 1100,
