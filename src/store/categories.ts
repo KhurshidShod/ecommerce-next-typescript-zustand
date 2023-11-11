@@ -7,7 +7,7 @@ import { persist } from "zustand/middleware";
 
 interface CategoryState {
   loading: boolean;
-  categories: [];
+  categories: Category[];
   getCategories: () => void;
 }
 const useCategories = create<CategoryState>()((set) => ({

@@ -64,7 +64,7 @@ const CategoriesComp = () => {
   return (
     <div className={styles.categoriescom}>
       <Slider {...settings}>
-        {categories.map((cat) => (
+        {categories.map((cat: Category) => (
           <CategoryCard
             key={cat?._id}
             {...cat}
