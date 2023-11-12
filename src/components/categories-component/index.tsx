@@ -7,9 +7,40 @@ import CategoryCard from "../category";
 import Slider from "react-slick";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import Category from "@/types/Category";
+import { getCookie, setCookie } from "cookies-next";
 
 const CategoriesComp = () => {
   const { getCategories, categories, loading } = useCategories();
+
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number; slideCount: number}) => (
+    <button
+      {...props}
+      className={
+        "slick-prev slick-arrow" +
+        (currentSlide === 0 ? " slick-disabled" : "")
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === 0 ? true : false}
+      type="button"
+    >
+      <HiOutlineChevronLeft />
+    </button>
+  );
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }: {currentSlide: number, slideCount: number}) => (
+    <button
+      {...props}
+      className={
+        "slick-next slick-arrow" +
+        (currentSlide === slideCount - 1 ? " slick-disabled" : "")
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === slideCount - 1 ? true : false}
+      type="button"
+    >
+      <HiOutlineChevronRight />
+    </button>
+  );
+
   const settings = {
     dots: false,
     infinite: true,
@@ -18,16 +49,8 @@ const CategoriesComp = () => {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    nextArrow: (
-      <button>
-        <HiOutlineChevronRight />
-      </button>
-    ),
-    prevArrow: (
-      <button>
-        <HiOutlineChevronLeft />
-      </button>
-    ),
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowLeft />,
     draggable: true,
 
     responsive: [
@@ -49,9 +72,9 @@ const CategoriesComp = () => {
         },
       },
       {
-        breakpoint: 450,
+        breakpoint: 520,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
         },
       },
@@ -60,7 +83,6 @@ const CategoriesComp = () => {
   useEffect(() => {
     getCategories();
   }, [getCategories]);
-  console.log(categories);
 
   return (
     <div className={styles.categoriescom}>

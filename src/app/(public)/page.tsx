@@ -1,57 +1,21 @@
 import { Fragment, useEffect } from "react";
+import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
+import { ToastContainer } from 'react-toastify';
 import styles from "./Hero.module.scss";
 import Link from "next/link";
 import useLastProducts from "../../store/products";
 import LatestProducts from "@/components/latest-products";
+import 'react-toastify/dist/ReactToastify.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategoriesComp from "@/components/categories-component";
 import Slider from "react-slick";
-import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 
 const HomePage = () => {
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 5,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   autoplay: true,
-  //   nextArrow: <LuMoveRight />,
-  //   prevArrow: <LuMoveLeft />,
-  //   draggable: true,
-
-  //   responsive: [
-  //     {
-  //       breakpoint: 1100,
-  //       settings: {
-  //         slidesToShow: 4,
-  //         slidesToScroll: 1,
-  //         infinite: true,
-  //         dots: false,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 850,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //         initialSlide: 2,
-  //       },
-  //     },
-  //     {
-  //       breakpoint: 450,
-  //       settings: {
-  //         slidesToShow: 2,
-  //         slidesToScroll: 1,
-  //       },
-  //     },
-  //   ],
-  // };
   return (
-    <Fragment>
+      <Fragment>
+      <ToastContainer />
       <section className={styles.hero}>
         <div className="container">
           <div className={styles.hero__wrapper}>
@@ -85,9 +49,9 @@ const HomePage = () => {
                   <path
                     d="M6.375 3.75L11.625 9L6.375 14.25"
                     stroke="#008ECC"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </Link>
@@ -115,9 +79,9 @@ const HomePage = () => {
                   <path
                     d="M6.375 3.75L11.625 9L6.375 14.25"
                     stroke="#008ECC"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
               </Link>

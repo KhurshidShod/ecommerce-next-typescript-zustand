@@ -6,10 +6,39 @@ import LatestProduct from "../latest-product";
 import styles from "./LatestProducts.module.scss";
 import Slider from "react-slick";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
-import LastProductsType from '@/types/lastProductsTypes';
+import Product from "@/types/Product";
 
 const LatestProducts = () => {
   const { data, getData } = useLastProducts();
+
+  const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number; slideCount: number}) => (
+    <button
+      {...props}
+      className={
+        "slick-prev slick-arrow" +
+        (currentSlide === 0 ? " slick-disabled" : "")
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === 0 ? true : false}
+      type="button"
+    >
+      <HiOutlineChevronLeft />
+    </button>
+  );
+  const SlickArrowRight = ({ currentSlide, slideCount, ...props }: {currentSlide: number, slideCount: number}) => (
+    <button
+      {...props}
+      className={
+        "slick-next slick-arrow" +
+        (currentSlide === slideCount - 1 ? " slick-disabled" : "")
+      }
+      aria-hidden="true"
+      aria-disabled={currentSlide === slideCount - 1 ? true : false}
+      type="button"
+    >
+      <HiOutlineChevronRight />
+    </button>
+  );
 
   const settings = {
     dots: false,
@@ -19,8 +48,8 @@ const LatestProducts = () => {
     slidesToScroll: 1,
     autoplay: true,
     draggable: true,
-    nextArrow: <button><HiOutlineChevronRight /></button>,
-    prevArrow: <button><HiOutlineChevronLeft /></button>,
+    nextArrow: <SlickArrowRight />,
+    prevArrow: <SlickArrowLeft />,
     responsive: [
       {
         breakpoint: 1100,
@@ -52,11 +81,10 @@ const LatestProducts = () => {
   useEffect(() => {
     getData();
   }, [getData]);
-  console.log(data)
   return (
     <div className={styles.latest_products}>
       <Slider {...settings}>
-      {data.map((prod: LastProductsType) => <LatestProduct key={prod?._id} {...prod}  />)}
+      {data.map((prod: Product) => <LatestProduct key={prod?.createdAt} product={prod}  />)}
       </Slider>
     </div>
   );

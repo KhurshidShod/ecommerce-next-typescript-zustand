@@ -1,6 +1,6 @@
 .latest_product {
   width: 90%;
-  min-width: 250px;
+  min-width: 150px;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid var(--grey-border);
@@ -11,6 +11,7 @@
     width: 100%;
     height: 250px;
     border-bottom: 1px solid var(--grey-border);
+    overflow: hidden;
     &:hover{
       img{
         transform: scale(1.1);
@@ -52,6 +53,38 @@
       justify-content: space-between;
       p {
         font-size: 12px;
+      }
+    }
+  }
+  .changeCartStatus{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    h1{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      span{
+        font-size: 12px;
+        font-weight: 400;
+      }
+    }
+    button{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+      font-weight: 700;
+      &:first-child{
+        background-color: red;
+      }
+      &:last-child{
+        background-color: green;
       }
     }
   }
