@@ -15,12 +15,15 @@ interface CartState {
 
 const useCartProducts = create<CartState>()((set, get) => ({
   cartCookie: getCookie("cart"),
-  cart: getCookie("cart") ? JSON.parse(get().cartCookie) : [],
+  cart: get()?.cartCookie !== undefined ? JSON.parse(get()?.cartCookie) : [],
   addToCart: (product) => {
-    const item = get().cart.find((prod) => prod.product === product._id);
-    set((state) => ({
-      cart: [...state.cart, { product: product._id, quantity: 1 }],
-    }));
+    if(product.quantity > 0){
+      set((state) => ({
+        cart: [...state.cart, { product: product._id, quantity: 1 }],
+      }));
+    } else {
+      toast.error("Not available now")
+    }
     setCookie("cart", JSON.stringify(get().cart));
   },
   removeFromCart: (id) => {
