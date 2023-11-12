@@ -1,10 +1,11 @@
 import CartProduct from "@/types/CartItem";
 import Product from "@/types/Product";
-import { getCookie, setCookie } from "cookies-next";
+import { CookieValueTypes, getCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { create } from "zustand";
 
 interface CartState {
+  cartCookie: any;
   cart: CartProduct[];
   addToCart: (product: Product) => void;
   increaseQuantity: (product: Product) => void;
@@ -13,8 +14,10 @@ interface CartState {
 }
 
 const useCartProducts = create<CartState>()((set, get) => ({
-  cart: getCookie("cart") ? JSON.parse(getCookie("cart")) : [],
+  cartCookie: getCookie("cart"),
+  cart: getCookie("cart") ? JSON.parse(get().cartCookie) : [],
   addToCart: (product) => {
+    console.log(typeof getCookie("cart"))
     const item = get().cart.find((prod) => prod.product === product._id);
     set((state) => ({
       cart: [...state.cart, { product: product._id, quantity: 1 }],
