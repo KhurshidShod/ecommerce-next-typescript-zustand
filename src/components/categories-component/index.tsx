@@ -49,8 +49,8 @@ const CategoriesComp = () => {
     slidesToScroll: 1,
     initialSlide: 0,
     autoplay: true,
-    nextArrow: <HiOutlineChevronRight />,
-    prevArrow: <HiOutlineChevronLeft />,
+    nextArrow: <button><HiOutlineChevronRight /></button>,
+    prevArrow: <button><HiOutlineChevronLeft /></button>,
     draggable: true,
 
     responsive: [

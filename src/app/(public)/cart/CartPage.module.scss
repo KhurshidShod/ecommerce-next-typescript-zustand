@@ -1,6 +1,55 @@
 .cart{
     width: 100%;
-    height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px);
     background-color: red;
     margin-top: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    &__wrapper{
+        width: 75%;
+        background-color: #212844;
+        margin-top: 5rem;
+        border-radius: 20px;
+        padding: 1rem;
+        &_header{
+            width: 100%;
+            color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+                padding: .5rem;
+                height: 50px;
+            *{
+                flex-grow: 1;
+                text-align: center;
+            }
+        }
+        &_cards{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1rem;
+            &_card{
+                width: 100%;
+                color: #212844;
+                background-color: white;
+                padding: .5rem;
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                height: 50px;
+                border-radius: 10px;
+                *{
+                    flex-grow: 1;
+                    display: flex;
+                    justify-content: start;
+                    text-align: start;
+                }
+            }
+        }
+    }
 }

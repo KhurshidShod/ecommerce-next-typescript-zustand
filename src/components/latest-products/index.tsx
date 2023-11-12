@@ -48,8 +48,8 @@ const LatestProducts = () => {
     slidesToScroll: 1,
     autoplay: true,
     draggable: true,
-    nextArrow: <HiOutlineChevronRight />,
-    prevArrow: <HiOutlineChevronLeft />,
+    nextArrow: <button><HiOutlineChevronRight /></button>,
+    prevArrow: <button><HiOutlineChevronLeft /></button>,
     responsive: [
       {
         breakpoint: 1100,
