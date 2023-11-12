@@ -11,34 +11,34 @@ import Product from "@/types/Product";
 const LatestProducts = () => {
   const { data, getData } = useLastProducts();
 
-  const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number; slideCount: number}) => (
-    <button
-      {...props}
-      className={
-        "slick-prev slick-arrow" +
-        (currentSlide === 0 ? " slick-disabled" : "")
-      }
-      aria-hidden="true"
-      aria-disabled={currentSlide === 0 ? true : false}
-      type="button"
-    >
-      <HiOutlineChevronLeft />
-    </button>
-  );
-  const SlickArrowRight = ({ currentSlide, slideCount, ...props }: {currentSlide: number, slideCount: number}) => (
-    <button
-      {...props}
-      className={
-        "slick-next slick-arrow" +
-        (currentSlide === slideCount - 1 ? " slick-disabled" : "")
-      }
-      aria-hidden="true"
-      aria-disabled={currentSlide === slideCount - 1 ? true : false}
-      type="button"
-    >
-      <HiOutlineChevronRight />
-    </button>
-  );
+  // const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number; slideCount: number}) => (
+  //   <button
+  //     {...props}
+  //     className={
+  //       "slick-prev slick-arrow" +
+  //       (currentSlide === 0 ? " slick-disabled" : "")
+  //     }
+  //     aria-hidden="true"
+  //     aria-disabled={currentSlide === 0 ? true : false}
+  //     type="button"
+  //   >
+  //     <HiOutlineChevronLeft />
+  //   </button>
+  // );
+  // const SlickArrowRight = ({ currentSlide, slideCount, ...props }: {currentSlide: number, slideCount: number}) => (
+  //   <button
+  //     {...props}
+  //     className={
+  //       "slick-next slick-arrow" +
+  //       (currentSlide === slideCount - 1 ? " slick-disabled" : "")
+  //     }
+  //     aria-hidden="true"
+  //     aria-disabled={currentSlide === slideCount - 1 ? true : false}
+  //     type="button"
+  //   >
+  //     <HiOutlineChevronRight />
+  //   </button>
+  // );
 
   const settings = {
     dots: false,
@@ -48,8 +48,8 @@ const LatestProducts = () => {
     slidesToScroll: 1,
     autoplay: true,
     draggable: true,
-    nextArrow: <SlickArrowRight />,
-    prevArrow: <SlickArrowLeft />,
+    nextArrow: <HiOutlineChevronRight />,
+    prevArrow: <HiOutlineChevronLeft />,
     responsive: [
       {
         breakpoint: 1100,
