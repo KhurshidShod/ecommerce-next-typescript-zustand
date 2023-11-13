@@ -6,8 +6,9 @@ import { useState } from 'react';
 import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
 const Header = () => {
+  const [jsonCart, setJsonCart] = useState(getCookie("cart"))
   const [headerOpen, setHeaderOpen] = useState(false);
-  const cart = getCookie("cart") !== undefined ? getCookie("cart") : '[]';
+  const cart = jsonCart !== undefined ? jsonCart : '[]';
   return (
     <header className={styles.header}>
     <div className="container">
