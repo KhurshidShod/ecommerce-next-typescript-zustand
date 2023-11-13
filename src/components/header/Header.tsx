@@ -7,7 +7,7 @@ import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
 const Header = () => {
   const [headerOpen, setHeaderOpen] = useState(false);
-  const cart = getCookie("cart") ? getCookie("cart") : '[]';
+  const cart = getCookie("cart") !== undefined ? getCookie("cart") : '[]';
   return (
     <header className={styles.header}>
     <div className="container">
