@@ -5,9 +5,10 @@ import styles from '../../app/(public)/PublicLayout.module.scss';
 import { useEffect, useState } from 'react';
 import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
+import { CartProductType } from '@/types/CartItem';
 const Header = () => {
   // const [jsonCart, setJsonCart] = useState(getCookie("cart"))
-  const [total, setTotal] = useState(null)
+  const [total, setTotal] = useState<CartProductType[] | null>(null)
   const [headerOpen, setHeaderOpen] = useState(false);
   // const cart = jsonCart !== undefined ? jsonCart : '[]';
   const {cart} = useCartProducts()
