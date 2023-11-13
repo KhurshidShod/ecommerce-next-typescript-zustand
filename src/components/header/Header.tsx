@@ -2,13 +2,17 @@
 
 import Link from 'next/link';
 import styles from '../../app/(public)/PublicLayout.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
 const Header = () => {
   const [jsonCart, setJsonCart] = useState(getCookie("cart"))
+  const [total, setTotal] = useState(0)
   const [headerOpen, setHeaderOpen] = useState(false);
   const cart = jsonCart !== undefined ? jsonCart : '[]';
+  useEffect(() => {
+    setTotal(JSON.parse(jsonCart !== undefined ? jsonCart : '[]').length)
+  }, [])
   return (
     <header className={styles.header}>
     <div className="container">
@@ -204,7 +208,7 @@ const Header = () => {
               />
             </svg>
             <Link href="/cart">Cart</Link>
-            <span>{JSON.parse(cart).length}</span>
+            <span>{total}</span>
           </button>
         </div>
       </nav>
