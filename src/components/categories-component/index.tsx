@@ -12,35 +12,6 @@ import { getCookie, setCookie } from "cookies-next";
 const CategoriesComp = () => {
   const { getCategories, categories, loading } = useCategories();
 
-  // const SlickArrowLeft = ({ currentSlide, slideCount, ...props } : {currentSlide: number; slideCount: number}) => (
-  //   <button
-  //     {...props}
-  //     className={
-  //       "slick-prev slick-arrow" +
-  //       (currentSlide === 0 ? " slick-disabled" : "")
-  //     }
-  //     aria-hidden="true"
-  //     aria-disabled={currentSlide === 0 ? true : false}
-  //     type="button"
-  //   >
-  //     <HiOutlineChevronLeft />
-  //   </button>
-  // );
-  // const SlickArrowRight = ({ currentSlide, slideCount, ...props }: {currentSlide: number, slideCount: number}) => (
-  //   <button
-  //     {...props}
-  //     className={
-  //       "slick-next slick-arrow" +
-  //       (currentSlide === slideCount - 1 ? " slick-disabled" : "")
-  //     }
-  //     aria-hidden="true"
-  //     aria-disabled={currentSlide === slideCount - 1 ? true : false}
-  //     type="button"
-  //   >
-  //     <HiOutlineChevronRight />
-  //   </button>
-  // );
-
   const settings = {
     dots: false,
     infinite: true,

@@ -14,10 +14,10 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-      <html lang="en">
+    <html lang="en">
       <body className={montserrat.className}>
         <Header />
-        {children}
+        <main>{children}</main>
         <footer>Footer</footer>
       </body>
     </html>

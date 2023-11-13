@@ -4,9 +4,10 @@ import Link from 'next/link';
 import styles from '../../app/(public)/PublicLayout.module.scss';
 import { useState } from 'react';
 import useCartProducts from '@/store/cart';
+import { getCookie } from 'cookies-next';
 const Header = () => {
   const [headerOpen, setHeaderOpen] = useState(false);
-  const {cart} = useCartProducts()
+  const {cart} = useCartProducts();
   return (
     <header className={styles.header}>
     <div className="container">
@@ -202,7 +203,7 @@ const Header = () => {
               />
             </svg>
             <Link href="/cart">Cart</Link>
-            <span>{cart.length}</span>
+            <span>{getCookie("cart") ? JSON.parse(getCookie("cart")).length : 0}</span>
           </button>
         </div>
       </nav>
