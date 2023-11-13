@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
 const Header = () => {
-  const [jsonCart, setJsonCart] = useState(getCookie("cart"))
-  const [total, setTotal] = useState(0)
+  // const [jsonCart, setJsonCart] = useState(getCookie("cart"))
+  const [total, setTotal] = useState(null)
   const [headerOpen, setHeaderOpen] = useState(false);
-  const cart = jsonCart !== undefined ? jsonCart : '[]';
+  // const cart = jsonCart !== undefined ? jsonCart : '[]';
+  const {cart} = useCartProducts()
   useEffect(() => {
-    setTotal(JSON.parse(jsonCart !== undefined ? jsonCart : '[]').length)
-  }, [jsonCart])
+    setTotal(cart)
+  }, [cart])
   return (
     <header className={styles.header}>
     <div className="container">
@@ -208,7 +209,7 @@ const Header = () => {
               />
             </svg>
             <Link href="/cart">Cart</Link>
-            <span>{total}</span>
+            <span>{total?.length}</span>
           </button>
         </div>
       </nav>
