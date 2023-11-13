@@ -7,7 +7,7 @@ import useCartProducts from '@/store/cart';
 import { getCookie } from 'cookies-next';
 const Header = () => {
   const [headerOpen, setHeaderOpen] = useState(false);
-  const {cart} = useCartProducts();
+  const cart = getCookie("cart") ? getCookie("cart") : '[]';
   return (
     <header className={styles.header}>
     <div className="container">
@@ -203,7 +203,7 @@ const Header = () => {
               />
             </svg>
             <Link href="/cart">Cart</Link>
-            <span>{getCookie("cart") ? JSON.parse(getCookie("cart")).length : 0}</span>
+            <span>{JSON.parse(cart).length}</span>
           </button>
         </div>
       </nav>
