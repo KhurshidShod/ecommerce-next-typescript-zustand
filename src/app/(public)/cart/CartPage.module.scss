@@ -2,6 +2,7 @@
     width: 100%;
     min-height: calc(100vh - 90px);
     padding-top: 90px;
+    background-color: var(--blue);
     &__wrapper{
         width: 75%;
         @media (max-width: 550px){
