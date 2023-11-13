@@ -1,4 +1,7 @@
+import Product from "./Product";
+
 export default interface CartProduct {
-    product: string;
-    quantity: number;
-  }
+  cartQuantity: number;
+}
+
+export type CartProductType = CartProduct & Product;

@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 import { Fragment, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import CartItemCards from '@/components/cart-item-cards';
+import { getCookie } from 'cookies-next';
 
 // export const metadata: Metadata = {
 //   title: "MegaMart | Cart",
@@ -12,33 +14,27 @@ import { useRouter, useSearchParams } from 'next/navigation';
 // };
 
 const CartPage = () => {
-  const searchParams = useSearchParams();
-  const router = useRouter()
-  console.log(searchParams.get("category"))
-  useEffect(() => {
-    router.push(`?category=sovunlar`)
-  }, [router])
+  // const searchParams = useSearchParams();
+  // const router = useRouter()
+  console.log(getCookie("cart"))
+  // console.log(searchParams.get("category"))
+  // useEffect(() => {
+  //   router.push(`?category=sovunlar`)
+  // }, [router])
   return (
     <Fragment>
       <ToastContainer />
       <section className={styles.cart}>
+        <div className="container">
         <div className={styles.cart__wrapper}>
           <div className={styles.cart__wrapper_header}>
-            <p>Name</p>
-            <p>Category</p>
-            <p>Price</p>
-            <p>Quantity</p>
-            <p>Action</p>
+            <b>Name</b>
+            <b>Quantity</b>
+            <b>Price</b>
+            <b>Remove</b>
           </div>
-          <div className={styles.cart__wrapper_cards}>
-          <div className={styles.cart__wrapper_cards_card}>
-            <p>Lorem</b>
-            <span>Sovunlar</span>
-            <p>170000</p>
-            <p>3</p>
-            <button>❌</button>
-          </div>
-          </div>
+          <CartItemCards />
+        </div>
         </div>
       </section>
     </Fragment>

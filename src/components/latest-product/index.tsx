@@ -6,7 +6,7 @@ import { onImageError } from "@/utils/ImageErrorHandler";
 import Product from "@/types/Product";
 import Img from "@/assets/images/No-Image-Placeholder.svg";
 import { getCookie } from "cookies-next";
-import CartProduct from "@/types/CartItem";
+import CartProduct, { CartProductType } from "@/types/CartItem";
 import { useSelector } from "react-redux";
 import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai'
 import useCartProducts from "@/store/cart";
@@ -47,15 +47,15 @@ const LatestProduct = ({ product }: { product: Product }) => {
           </p>
         </div>
       </div>
-      {cart.find((prod: CartProduct) => prod.product === product?._id) ? (
+      {cart.find((prod: CartProductType) => prod._id === product?._id) ? (
         <div className={styles.changeCartStatus}>
           <button onClick={() => {
             decreaseQuantity(product)
             }}><AiOutlineMinus /></button>
           <h1>
             {
-              cart.find((prod: CartProduct) => prod.product === product?._id)
-                ?.quantity
+              cart.find((prod: CartProductType) => prod._id === product?._id)
+                ?.cartQuantity
             }
             <span>{product.price}</span>
           </h1>

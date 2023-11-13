@@ -1,14 +1,14 @@
 .cart{
     width: 100%;
     min-height: calc(100vh - 90px);
-    background-color: red;
-    margin-top: 90px;
-    display: flex;
-    justify-content: center;
-    align-items: start;
+    padding-top: 90px;
     &__wrapper{
         width: 75%;
+        @media (max-width: 550px){
+            width: 100%;
+        }
         background-color: #212844;
+        margin: 0 auto;
         margin-top: 5rem;
         border-radius: 20px;
         padding: 1rem;
@@ -21,8 +21,12 @@
                 padding: .5rem;
                 height: 50px;
             *{
-                flex-grow: 1;
-                text-align: center;
+                width: calc(100% / 4);
+                display: flex;
+                justify-content: center;
+                &:nth-child(3){
+                    max-width: 50px;
+                }
             }
         }
         &_cards{
@@ -39,15 +43,35 @@
                 background-color: white;
                 padding: .5rem;
                 display: flex;
-                justify-content: space-evenly;
+                justify-content: space-between;
                 align-items: center;
                 height: 50px;
                 border-radius: 10px;
                 *{
+                    width: calc(100% / 4);
                     flex-grow: 1;
                     display: flex;
-                    justify-content: start;
-                    text-align: start;
+                    justify-content: center;
+                    &:nth-child(3){
+                        max-width: 50px;
+                    }
+                }
+                div{
+                    display: flex;
+                    justify-content: center;
+                    button{
+                        max-width: 35px;
+                        height: 35px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        border-radius: 5px;
+                        border: none;
+                        outline: none;
+                        background-color: transparent;
+                        cursor: pointer;
+                        font-size: 18px;
+                    }
                 }
             }
         }
