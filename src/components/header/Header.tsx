@@ -12,7 +12,7 @@ const Header = () => {
   const cart = jsonCart !== undefined ? jsonCart : '[]';
   useEffect(() => {
     setTotal(JSON.parse(jsonCart !== undefined ? jsonCart : '[]').length)
-  }, [])
+  }, [jsonCart])
   return (
     <header className={styles.header}>
     <div className="container">

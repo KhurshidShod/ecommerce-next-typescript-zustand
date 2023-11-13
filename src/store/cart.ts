@@ -5,17 +5,16 @@ import { toast } from "react-toastify";
 import { create } from "zustand";
 
 interface CartState {
-  cartCookie: any;
+  // cartCookie: any;
   cart: CartProductType[];
   addToCart: (product: Product) => void;
   increaseQuantity: (product: Product) => void;
   decreaseQuantity: (product: Product) => void;
   removeFromCart: (id: string) => void;
 }
-
+const cartCookie = getCookie("cart");
 const useCartProducts = create<CartState>()((set, get) => ({
-  cartCookie: getCookie("cart"),
-  cart: getCookie("cart") ? JSON.parse(getCookie("cart")) : [],
+  cart: JSON.parse(cartCookie !== undefined ? cartCookie : '[]'),
   addToCart: (product) => {
     if(product.quantity > 0){
       set((state) => ({...state,
