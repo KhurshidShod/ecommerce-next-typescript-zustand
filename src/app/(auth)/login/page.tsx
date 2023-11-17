@@ -23,7 +23,8 @@ const font = Space_Grotesk({
 
 const LoginPage = () => {
   const router = useRouter()
-  const {loading, login, token} = useAuth();
+  const {loading, login, user} = useAuth();
+  console.log(user)
 
   const formik = useFormik({
     initialValues: {

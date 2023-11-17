@@ -16,7 +16,7 @@ interface AuthState {
 }
 
 const useAuth = create<AuthState>()((set, get) => ({
-  user: getCookie("user") ? getCookie("user") : {},
+  user: getCookie("user") ? JSON.parse<CookieValueTypes>(getCookie("user")) : {},
   isAuth: getCookie("token") ? true : false,
   loading: false,
   token: getCookie("token") ? getCookie("token") : "",

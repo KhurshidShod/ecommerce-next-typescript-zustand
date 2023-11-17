@@ -11,12 +11,13 @@ import { useFormik } from "formik";
 const AccountPage = () => {
   const { user, token, editUserData } = useAuth();
   const [editing, setEditing] = useState(false);
+  console.log(typeof user)
   const formik = useFormik({
     initialValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      username: user.username,
-      phoneNumber: user.phoneNumber,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      username: user?.username,
+      phoneNumber: user?.phoneNumber,
     },
     onSubmit: (values) => {
       editUserData(values)
