@@ -6,7 +6,12 @@ import { CookieValueTypes, getCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   loading: boolean;
-  user: UserType | CookieValueTypes | {};
+  user: UserType | {
+    firstName: string;
+    lastName: string;
+    username: string;
+    phoneNumber: string;
+  };
   token: string | CookieValueTypes;
   isAuth: boolean;
   register: (user: object) => void;
@@ -15,8 +20,9 @@ interface AuthState {
   editUserData: (data: object) => void;
 }
 
+const userCookie = getCookie("user");
 const useAuth = create<AuthState>()((set, get) => ({
-  user: getCookie("user") ? JSON.parse<CookieValueTypes>(getCookie("user")) : {},
+  user: JSON.parse(userCookie !== undefined ? userCookie : '{}'),
   isAuth: getCookie("token") ? true : false,
   loading: false,
   token: getCookie("token") ? getCookie("token") : "",
