@@ -1,6 +1,6 @@
 import styles from './AdminHeader.module.scss';
 
-const AdminHeader = ({setCollapse, collapsed}) => {
+const AdminHeader = ({setCollapse, collapsed}: {setCollapse: () => boolean, collapsed: boolean}) => {
 
   return (
     <header className={`${styles.adminHeader} ${collapsed ? styles.collapsed : ''}`}>

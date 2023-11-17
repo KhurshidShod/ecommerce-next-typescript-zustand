@@ -73,6 +73,7 @@ const AccountPage = () => {
                 defaultValue={formik.values.phoneNumber}
               />
             </div>
+          <div className={styles.submitButton}>
             {editing ? (
               <button
                 type="submit"
@@ -83,9 +84,8 @@ const AccountPage = () => {
             ) : (
               <div onClick={() => setEditing(!editing)}>Edit profile</div>
             )}
-          </form>
-          <div className={styles.submitButton}>
           </div>
+          </form>
         </div>
       </div>
     </section>
