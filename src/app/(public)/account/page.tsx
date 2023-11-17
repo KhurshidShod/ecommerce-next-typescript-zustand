@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
-import { Metadata } from "next";
 import styles from "./AccountPage.module.scss";
 import useAuth from "@/store/auth";
-import { getCookie } from "cookies-next";
 import { useFormik } from "formik";
 
 // export const metadata: Metadata = {

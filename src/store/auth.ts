@@ -6,7 +6,7 @@ import { getCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   loading: boolean;
-  user: UserType | object;
+  user: UserType;
   token: string;
   isAuth: boolean;
   register: (user: object) => void;
