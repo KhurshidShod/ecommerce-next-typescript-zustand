@@ -75,8 +75,8 @@ const LatestProducts = () => {
       <Skeleton sx={{ bgcolor: 'grey.500' }} variant="text" width={'50%'} height={30} />
       <Skeleton sx={{ bgcolor: 'grey.500' }} variant="text" width={'100%'} height={30} />
       <div style={{display: 'flex', justifyContent: 'space-between'}}>
-      <Skeleton sx={{ bgcolor: 'grey.500' }} sx={{ bgcolor: 'grey.500' }} variant="text" width={'30%'} height={30} />
-      <Skeleton sx={{ bgcolor: 'grey.500' }} sx={{ bgcolor: 'grey.500' }} variant="text" width={'30%'} height={30} />
+      <Skeleton sx={{ bgcolor: 'grey.500' }} variant="text" width={'30%'} height={30} />
+      <Skeleton sx={{ bgcolor: 'grey.500' }} variant="text" width={'30%'} height={30} />
       </div>
       <Skeleton sx={{ bgcolor: 'grey.500' }} variant="rounded" width={'100%'} height={40} />
     </Stack>
