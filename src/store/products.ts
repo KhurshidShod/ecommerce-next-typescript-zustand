@@ -3,17 +3,22 @@ import { create } from "zustand";
 
 interface ProductsState {
   data: [];
+  loading: boolean;
   categories: [];
   getData: () => void;
   getCategories: () => void;
 }
 const useLastProducts = create<ProductsState>()((set) => ({
   data: [],
+  loading: false,
   categories: [],
   getData: async () => {
+    set(state => ({...state, loading: true}))
     await request
       .get("last-products")
-      .then((res) => set((state) => ({ ...state, data: res.data })));
+      .then((res) => {
+        set((state) => ({ ...state, data: res.data }))
+      }).finally(() => set(state => ({...state, loading: false})));
   },
   getCategories: async () => {
     await request

@@ -37,7 +37,7 @@ const HomePage = () => {
               <h1>
                 Check out latest <span>products</span>
               </h1>
-              <Link href="#">
+              <Link href="/allproducts">
                 View all products{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -67,8 +67,8 @@ const HomePage = () => {
               <h1>
                 Shop from <span>Top Categories</span>
               </h1>
-              <Link href="#">
-                View all categories{" "}
+              <Link href="/allproducts">
+                View all products{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"

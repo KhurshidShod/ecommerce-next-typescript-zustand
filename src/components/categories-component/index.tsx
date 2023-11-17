@@ -8,6 +8,8 @@ import Slider from "react-slick";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import Category from "@/types/Category";
 import { getCookie, setCookie } from "cookies-next";
+import Skeleton from '@mui/material/Skeleton';
+import Stack from '@mui/material/Stack';
 
 const CategoriesComp = () => {
   const { getCategories, categories, loading } = useCategories();
@@ -51,13 +53,39 @@ const CategoriesComp = () => {
       },
     ],
   };
+  console.log()
   useEffect(() => {
     getCategories();
   }, [getCategories]);
 
   return (
     <div className={styles.categoriescom}>
-      <Slider {...settings}>
+      {loading ? <div style={{width: '100%', display: 'flex', justifyContent: 'space-between', gap: '1rem'}}>
+        <div style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexDirection: 'column'}}>
+        <Stack spacing={0.2} style={{width: '90%'}}>
+        <Skeleton style={{margin: '0 auto'}} sx={{ bgcolor: 'grey.500' }} variant="circular" width={'80%'} height={200} />
+          <Skeleton style={{margin: '.5rem auto'}} sx={{ bgcolor: 'grey.500' }} variant="text" width={'65%'} height={30} />
+          </Stack>
+        </div>
+        <div style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexDirection: 'column'}}>
+        <Stack spacing={0.2} style={{width: '90%'}}>
+        <Skeleton style={{margin: '0 auto'}} sx={{ bgcolor: 'grey.500' }} variant="circular" width={'80%'} height={200} />
+          <Skeleton style={{margin: '.5rem auto'}} sx={{ bgcolor: 'grey.500' }} variant="text" width={'65%'} height={30} />
+          </Stack>
+        </div>
+        <div style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexDirection: 'column'}}>
+        <Stack spacing={0.2} style={{width: '90%'}}>
+        <Skeleton style={{margin: '0 auto'}} sx={{ bgcolor: 'grey.500' }} variant="circular" width={'80%'} height={200} />
+          <Skeleton style={{margin: '.5rem auto'}} sx={{ bgcolor: 'grey.500' }} variant="text" width={'65%'} height={30} />
+          </Stack>
+        </div>
+        <div style={{width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexDirection: 'column'}}>
+        <Stack spacing={0.2} style={{width: '90%'}}>
+        <Skeleton style={{margin: '0 auto'}} sx={{ bgcolor: 'grey.500' }} variant="circular" width={'80%'} height={200} />
+          <Skeleton style={{margin: '.5rem auto'}} sx={{ bgcolor: 'grey.500' }} variant="text" width={'65%'} height={30} />
+          </Stack>
+        </div>
+      </div> : <Slider {...settings}>
         {categories.map((cat: Category) => (
           <CategoryCard
             key={cat?._id}
@@ -65,7 +93,7 @@ const CategoriesComp = () => {
             color={Math.floor(Math.random() * 16777215).toString(16)}
           />
         ))}
-      </Slider>
+      </Slider>}
     </div>
   );
 };

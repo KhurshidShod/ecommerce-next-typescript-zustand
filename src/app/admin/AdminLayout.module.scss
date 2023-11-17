@@ -1,0 +1,12 @@
+.adminContent{
+    position: fixed;
+    width: calc(100% - 250px);
+    height: calc(100vh - 90px);
+    top: 90px;
+    left: 250px;
+    background-color: red;
+    &.collapsed{
+    width: calc(100% - 75px);
+    left: 75px;
+    }
+}

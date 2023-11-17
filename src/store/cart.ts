@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import { create } from "zustand";
 
 interface CartState {
-  // cartCookie: any;
   cart: CartProductType[];
   addToCart: (product: Product) => void;
   increaseQuantity: (product: Product) => void;
@@ -24,7 +23,6 @@ const useCartProducts = create<CartState>()((set, get) => ({
       toast.error("Not available now")
     }
     setCookie("cart", JSON.stringify(get().cart));
-    console.log(get().cart)
   },
   removeFromCart: (id) => {
     set((state) => ({...state, cart: get().cart.filter((prod) => prod._id !== id) }));
@@ -60,7 +58,6 @@ const useCartProducts = create<CartState>()((set, get) => ({
       }));
     }
     setCookie("cart", JSON.stringify(get().cart));
-    console.log(get().cart)
 
   },
 }));

@@ -86,6 +86,16 @@
           border: 1px solid #008ecc;
           padding-left: 0.5rem;
           color: #008ecc;
+          font-size: 16px;
+        }
+        p{
+          color: var(--blue);
+          position: absolute;
+          top: 57.5%;
+          right: 10px;
+          font-size: 24px;
+          transform: translateY(-50%);
+          cursor: pointer;
         }
       }
       button {

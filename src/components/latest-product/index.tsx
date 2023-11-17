@@ -5,15 +5,11 @@ import Image from "next/image";
 import { onImageError } from "@/utils/ImageErrorHandler";
 import Product from "@/types/Product";
 import Img from "@/assets/images/No-Image-Placeholder.svg";
-import { getCookie } from "cookies-next";
-import CartProduct, { CartProductType } from "@/types/CartItem";
-import { useSelector } from "react-redux";
+import { CartProductType } from "@/types/CartItem";
 import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai'
 import useCartProducts from "@/store/cart";
 
 const LatestProduct = ({ product }: { product: Product }) => {
-  // const state = useSelector(state => state);
-  // console.log(state, 'this is state');
   const { cart, increaseQuantity, decreaseQuantity, addToCart } =
     useCartProducts();
   return (

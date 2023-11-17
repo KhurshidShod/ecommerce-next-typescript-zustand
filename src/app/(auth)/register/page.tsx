@@ -1,12 +1,14 @@
 'use client';
 
+import { useState } from "react";
 import { Space_Grotesk } from "next/font/google";
-import Img from "@/assets/images/log-reg.png";
 import { useFormik } from 'formik'
 import styles from "./RegisterPage.module.scss";
 import "../../globals.css";
-import Image from "next/image";
 import Link from "next/link";
+import useAuth from "@/store/auth";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { useRouter } from "next/navigation";
 
 const font = Space_Grotesk({
   subsets: ["latin", "latin-ext", "vietnamese"],
@@ -15,6 +17,10 @@ const font = Space_Grotesk({
 
 
 const RegisterPage = () => {
+  const {register, loading} = useAuth();
+  const [passVisible, setPassVisible] = useState<boolean>(false)
+  const router = useRouter()
+
   const formik = useFormik({
     initialValues: {
       firstName: '',
@@ -23,7 +29,9 @@ const RegisterPage = () => {
       phoneNumber: '',
       password: ''
     },
-    onSubmit: values => {
+    onSubmit: (values) => {
+      register(values)
+        router.push("/")
     },
   });
   return (
@@ -85,13 +93,14 @@ const RegisterPage = () => {
               <label htmlFor="password">Password</label>
               <input
                 className={font.className}
-                type="text"
+                type={passVisible ? "text" : "password"}
                 autoComplete="off"
                 name="password"
                 id="password"
                 onChange={formik.handleChange}
                 value={formik.values.password}
               />
+              <p onClick={() => setPassVisible(!passVisible)}>{passVisible ? <AiFillEyeInvisible /> : <AiFillEye />}</p>
             </div>
             <div>
             <button className={font.className}>Register</button>

@@ -4,17 +4,22 @@ import Link from 'next/link';
 import styles from '../../app/(public)/PublicLayout.module.scss';
 import { useEffect, useState } from 'react';
 import useCartProducts from '@/store/cart';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import { CartProductType } from '@/types/CartItem';
+import useAuth from '@/store/auth';
+import { usePathname } from 'next/navigation';
+
 const Header = () => {
-  // const [jsonCart, setJsonCart] = useState(getCookie("cart"))
+  const {isAuth} = useAuth()
+  const [auth, setAuth] = useState(false)
   const [total, setTotal] = useState<CartProductType[] | null>(null)
   const [headerOpen, setHeaderOpen] = useState(false);
-  // const cart = jsonCart !== undefined ? jsonCart : '[]';
-  const {cart} = useCartProducts()
+  const {cart} = useCartProducts();
+  const pathname = usePathname()
   useEffect(() => {
     setTotal(cart)
-  }, [cart])
+    setAuth(isAuth)
+  }, [cart, isAuth])
   return (
     <header className={styles.header}>
     <div className="container">
@@ -131,19 +136,21 @@ const Header = () => {
             </svg>
           </Link>
         </div>
-        <div className={styles.actions}>
-          <ul className={`${headerOpen ? styles.headerOpen : null}`}>
-            <li>
-              <Link href="#">All products</Link>
+        <div>
+        <div className={`${styles.actions} ${headerOpen ? styles.headerOpen : null}`}>
+          <ul>
+            <li className={`${pathname.slice(1) === 'allproducts' ? styles.active_link : ''}`}>
+              <Link href="/allproducts">All products</Link>
             </li>
-            <li>
-              <Link href="#">About</Link>
+            <li className={`${pathname.slice(1) === 'about' ? styles.active_link : ''}`}>
+              <Link href="/about">About</Link>
             </li>
-            <li>
-              <Link href="#">Contact</Link>
+            <li className={`${pathname.slice(1) === 'contact' ? styles.active_link : ''}`}>
+              <Link href="/contact">Contact</Link>
             </li>
           </ul>
-          <div>
+        </div>
+          <div className={styles.actions__btns}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -165,10 +172,9 @@ const Header = () => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
-            </svg>
-            <Link href="/login">Sign Up/Sign In</Link>
+            </svg>{auth ? <Link href="/account">Account</Link> : <Link href="/login">Sign Up/Sign In</Link>}
           </div>
-          <button>
+          <Link href="/cart" className={styles.cartLink}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -209,9 +215,8 @@ const Header = () => {
                 strokeLinejoin="round"
               />
             </svg>
-            <Link href="/cart">Cart</Link>
             <span>{total?.length}</span>
-          </button>
+            </Link>
         </div>
       </nav>
     </div>

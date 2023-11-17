@@ -1,0 +1,22 @@
+.adminHeader{
+    width: calc(100% - 250px);
+    background-color: #212844;
+    position: fixed;
+    top: 0;
+    right: 0;
+    &.collapsed{
+        width: calc(100% - 75px);
+    }
+    nav{
+        width: 100%;
+        height: 90px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        div{
+            svg{
+                cursor: pointer;
+            }
+        }
+    }
+}

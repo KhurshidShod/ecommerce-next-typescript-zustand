@@ -1,18 +1,21 @@
 import Image from "next/image";
 import styles from "./Category.module.scss";
 import Img from "@/assets/images/No-Image-Placeholder.svg";
+import Link from 'next/link'
 
 const CategoryCard = ({
+  _id,
   color,
   name,
   image,
 }: {
+  _id: string;
   color: string;
   name: string;
   image: { url: string };
 }) => {
   return (
-    <div className={styles.category_card}>
+    <Link href={`/allproducts?category=${_id}`} className={styles.category_card}>
       <div
         style={{
           backgroundColor: `#${color}`,
@@ -32,7 +35,7 @@ const CategoryCard = ({
       >
         {name}
       </p>
-    </div>
+    </Link>
   );
 };
 
