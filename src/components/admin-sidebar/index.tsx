@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import styles from './AdminSidebar.module.scss';
 
-const AdminSidebar = ({collapsed}) => {
+const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
     return (
         <div className={`${styles.adminSidebar} ${collapsed ? styles.collapsed : ''}`}>
             <div className={styles.adminSidebar__logo}>

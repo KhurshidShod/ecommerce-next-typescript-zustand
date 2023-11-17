@@ -7,6 +7,12 @@ import { MdDelete } from "react-icons/md";
 
 const CartItemCards = () => {
   const {cart, removeFromCart} = useCartProducts()
+  const submitCart = () => {
+    const cartData = cart.map(el => {
+      return {product: el?._id, quantity: el?.cartQuantity}
+    })
+    console.log(cartData)
+  }
   return (
     <div className={styles.cart__wrapper_cards}>
     {cart.length ? cart.map(prod => <div key={prod._id} className={styles.cart__wrapper_cards_card}>
