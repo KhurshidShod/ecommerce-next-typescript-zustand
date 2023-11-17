@@ -24,10 +24,6 @@ const CartPage = () => {
             </div>
             <CartItemCards />
           </div>
-          <div className={styles.cart__actions}>
-            <textarea placeholder="Comment here" name="" id="" cols={30} rows={10}></textarea>
-            <button>Confirm payment</button>
-          </div>
         </div>
       </section>
     </Fragment>

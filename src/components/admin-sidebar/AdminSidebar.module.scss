@@ -15,4 +15,44 @@
         justify-content: center;
         align-items: center;
     }
+    &__menu{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        padding: .5rem;
+        ul{
+            width: 100%;
+            li{
+                width: calc(250px - 1rem);
+                background-color: transparent;
+                list-style: none;
+                height: 50px;
+                display: flex;
+                align-items: center;
+                margin: .5rem 0;
+                padding: .5rem;
+                border-radius: 7.5px;
+                font-family: 'Montserrat';
+                font-size: 18px;
+                font-weight: 700;
+                color: white;
+                cursor: pointer;
+                transition: .1s linear;
+                span{
+                    width: 40px;
+                    height: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 28px;
+                    color: var(--blue);
+                    margin-right: 1.2rem;
+                }
+                &:hover{
+                    background-color: white;
+                    color: #212844;
+                }
+            }
+        }
+    }
 }

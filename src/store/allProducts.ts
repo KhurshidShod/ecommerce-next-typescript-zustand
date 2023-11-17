@@ -5,7 +5,7 @@ import { create } from "zustand";
 interface AllProductsState {
     products: Product[];
     total: number;
-    page: number;
+    page: number | string | null;
     params: object;
     getAllProducts: () => void;
     setParams: (param: object) => void;

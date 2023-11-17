@@ -99,44 +99,40 @@
                 // }
             }
         }
-    }
-    &__actions{
-        width: 75%;
-        @media (max-width: 550px){
+        &_actions{
             width: 100%;
+            background-color: #212844;
+            margin: 0 auto;
+            margin-top: 3rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            textarea{
+                height: 50px;
+                flex-grow: 1;
+                border-radius: 10px;
+                padding: 5px;
+                resize: none;
+                border: none;
+                outline: none;
+                font-family: 'Montserrat'
+            }
+            button{
+                width: 150px;
+                height: 50px;
+                border-radius: 10px;
+                font-family: 'Montserrat';
+                border: none;
+                outline: none;
+                background-color: white;
+                color: #212844;
+                font-weight: 700;
+                font-size: 14px;
+                cursor: pointer;
+    }
         }
-        background-color: #212844;
-        margin: 0 auto;
-        margin-top: 1rem;
-        border-radius: 20px;
-        padding: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 3rem;
-        textarea{
-            height: 50px;
-            flex-grow: 1;
-            border-radius: 10px;
-            padding: 5px;
-            resize: none;
-            border: none;
-            outline: none;
-            font-family: 'Montserrat'
-        }
-        button{
-            width: 150px;
-            height: 50px;
-            border-radius: 10px;
-            font-family: 'Montserrat';
-            border: none;
-            outline: none;
-            background-color: white;
-            color: #212844;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-}
     }
 }
 

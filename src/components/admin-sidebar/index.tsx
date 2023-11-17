@@ -1,5 +1,7 @@
-import { useState } from 'react'
 import styles from './AdminSidebar.module.scss';
+import { AiFillDashboard } from "react-icons/ai";
+import { FaUsers, FaMoneyBillTrendUp } from "react-icons/fa6";
+import { FaShoppingBasket } from "react-icons/fa";
 
 const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
     return (
@@ -75,6 +77,14 @@ const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
                 fill="#008ECC"
               />
             </svg>}
+            </div>
+            <div className={styles.adminSidebar__menu}>
+              <ul>
+                <li><span><AiFillDashboard /></span>Dashboard</li>
+                <li><span><FaUsers /></span>Users</li>
+                <li><span><FaShoppingBasket /></span>Products</li>
+                <li><span><FaMoneyBillTrendUp /></span>Orders</li>
+              </ul>
             </div>
         </div>
     )

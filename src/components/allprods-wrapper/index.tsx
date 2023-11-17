@@ -15,7 +15,7 @@ const AllProductsWrapper = () => {
 
   useEffect(() => {
     if (searchParams.get("page") !== page) {
-      setPage(searchParams.get("page"))
+      setPage(Number(searchParams.get("page")))
     } else {
       router.push(`?page=${page}`)
     }
@@ -34,13 +34,13 @@ const AllProductsWrapper = () => {
         {products.map((prod: Product) => <div key={prod?._id}><LatestProduct product={prod} /></div>)}
       </div>
       <div className={styles.allproducts__wrapper_pagination}>
-        <PaginationComponent currentPage={searchParams.get("page")} total={total} store={(pg: number) => {
+        <PaginationComponent total={total} store={(pg): void => {
           if (searchParams.get("category")) {
             router.push(`?page=${pg}&category=${searchParams.get("category")}`)
           } else {
             router.push(`?page=${pg}`)
           }
-          setPage<number>(pg)
+          setPage(pg)
         }} />
       </div>
     </Fragment>
