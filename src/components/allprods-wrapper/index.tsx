@@ -34,7 +34,7 @@ const AllProductsWrapper = () => {
         {products.map((prod: Product) => <div key={prod?._id}><LatestProduct product={prod} /></div>)}
       </div>
       <div className={styles.allproducts__wrapper_pagination}>
-        <PaginationComponent total={total} store={(pg): void => {
+        <PaginationComponent total={total} store={(pg: number) => {
           if (searchParams.get("category")) {
             router.push(`?page=${pg}&category=${searchParams.get("category")}`)
           } else {
