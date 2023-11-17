@@ -2,12 +2,12 @@ import create, { StateCreator } from "zustand";
 import request from "../server/request";
 import UserType from "@/types/User";
 import { toast } from "react-toastify";
-import { getCookie, setCookie } from "cookies-next";
+import { CookieValueTypes, getCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   loading: boolean;
-  user: UserType;
-  token: string;
+  user: UserType | CookieValueTypes | {};
+  token: string | CookieValueTypes;
   isAuth: boolean;
   register: (user: object) => void;
   login: (user: object, router: any) => void;
@@ -16,7 +16,7 @@ interface AuthState {
 }
 
 const useAuth = create<AuthState>()((set, get) => ({
-  user: getCookie("user") ? JSON.parse(getCookie("user")) : {},
+  user: getCookie("user") ? getCookie("user") : {},
   isAuth: getCookie("token") ? true : false,
   loading: false,
   token: getCookie("token") ? getCookie("token") : "",
