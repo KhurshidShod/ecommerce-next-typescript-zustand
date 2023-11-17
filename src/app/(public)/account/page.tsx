@@ -28,7 +28,7 @@ const AccountPage = () => {
       <div className="container">
         <div className={styles.account__wrapper}>
           <h1>Account</h1>
-          <form action="">
+          <form action="" onSubmit={formik.handleSubmit}>
             <div>
               <label htmlFor=""></label>
               <input
@@ -73,19 +73,18 @@ const AccountPage = () => {
                 defaultValue={formik.values.phoneNumber}
               />
             </div>
-          </form>
-          <div className={styles.submitButton}>
             {editing ? (
               <button
                 type="submit"
-                onClick={formik.handleSubmit}
                 className={styles.saveInfos}
               >
                 Save infos
               </button>
             ) : (
-              <button onClick={() => setEditing(!editing)}>Edit profile</button>
+              <div onClick={() => setEditing(!editing)}>Edit profile</div>
             )}
+          </form>
+          <div className={styles.submitButton}>
           </div>
         </div>
       </div>

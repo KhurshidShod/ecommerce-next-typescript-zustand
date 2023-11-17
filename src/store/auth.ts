@@ -61,6 +61,7 @@ const useAuth = create<AuthState>()((set, get) => ({
     });
   },
   editUserData: async(data) => {
+    console.log(get().token)
     await request.put('auth/update', data, {headers: {
       "Authorization": "Bearer " + get().token
     }}).then(res => {
