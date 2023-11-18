@@ -10,6 +10,7 @@ import {AiOutlineMinus, AiOutlinePlus} from 'react-icons/ai'
 import useCartProducts from "@/store/cart";
 
 const LatestProduct = ({ product }: { product: Product }) => {
+  // const { isAuth } = useAuth
   const { cart, increaseQuantity, decreaseQuantity, addToCart } =
     useCartProducts();
   return (
@@ -62,8 +63,8 @@ const LatestProduct = ({ product }: { product: Product }) => {
       ) : (
         <button
           onClick={() => {
+            // if()
             addToCart(product);
-            console.log(cart);
           }}
         >
           Buy - {product?.price}

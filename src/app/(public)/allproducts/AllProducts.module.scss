@@ -18,8 +18,9 @@
         background-color: var(--blue);
         input{
             height: 35px;
+            max-width: 550px;
             border-radius: 5px;
-            flex-grow: 0.25;
+            flex-grow: 1;
             border: none;
             outline: none;
             padding-left: .5rem;
@@ -29,10 +30,15 @@
         div{
             display: flex;
             gap: 5px;
+            max-width: 550px;
+            flex-grow: 1;
+            flex-wrap: wrap;
             select{
                 width: 125px;
                 height: 35px;
-                border-radius: 5px;
+                padding-left: .5rem;
+            flex-grow: 1;
+            border-radius: 5px;
                 border: none;
                 outline: none;
             font-family: 'Montserrat';
@@ -48,6 +54,8 @@
                 gap: 5px;
                 cursor: pointer;
             font-family: 'Montserrat';
+            flex-grow: .05;
+            height: 35px;
 
                 span{
                     display: flex;
