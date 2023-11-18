@@ -1,16 +1,20 @@
-import { Fragment, useEffect } from "react";
+import { Metadata } from "next";
+import { Fragment } from "react";
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from "react-icons/hi2";
 import { ToastContainer } from 'react-toastify';
 import styles from "./Hero.module.scss";
 import Link from "next/link";
-import useLastProducts from "../../store/products";
 import LatestProducts from "@/components/latest-products";
 import 'react-toastify/dist/ReactToastify.css';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CategoriesComp from "@/components/categories-component";
-import Slider from "react-slick";
+
+export const metadata: Metadata = {
+  title: "MegaMart | Home",
+  description: "MegaMart e-commerce by Xurshid",
+};
 
 const HomePage = () => {
   return (

@@ -10,6 +10,8 @@
         &_header{
             display: flex;
             justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
             padding: 1rem;
             width: 100%;
             border-radius: 10px;
@@ -70,7 +72,7 @@
             div{
                 width: calc(100% / 4 - 1rem);
                 min-width: 200px;
-                flex-grow: .75;
+                flex-grow: 1;
                 div{
                     width: 100% !important;
                 }

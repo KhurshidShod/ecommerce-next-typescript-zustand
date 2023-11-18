@@ -1,5 +1,6 @@
 import request from "@/server/request";
 import { create } from "zustand";
+import crud from "./crud";
 
 interface ProductsState {
   data: [];

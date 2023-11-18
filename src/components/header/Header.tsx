@@ -1,13 +1,15 @@
 "use client";
 
-import Link from 'next/link';
-import styles from '../../app/(public)/PublicLayout.module.scss';
 import { useEffect, useState } from 'react';
-import useCartProducts from '@/store/cart';
-import { getCookie, setCookie } from 'cookies-next';
-import { CartProductType } from '@/types/CartItem';
-import useAuth from '@/store/auth';
 import { usePathname } from 'next/navigation';
+import { Montserrat } from "next/font/google";
+import { CartProductType } from '@/types/CartItem';
+import Link from 'next/link';
+import useCartProducts from '@/store/cart';
+import useAuth from '@/store/auth';
+import styles from '../../app/(public)/PublicLayout.module.scss';
+
+const montserrat = Montserrat({ subsets: ["latin"] });
 
 const Header = () => {
   const {isAuth} = useAuth()
@@ -21,7 +23,7 @@ const Header = () => {
     setAuth(isAuth)
   }, [cart, isAuth])
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${montserrat.className}`}>
     <div className="container">
       <nav>
         <div className={styles.logo}>
