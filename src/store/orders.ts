@@ -2,17 +2,15 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import {getCookie} from 'cookies-next'
 import request from "@/server/request";
-import UserType from '@/types/User'
+import OrderType from '@/types/Orders'
 
 interface UsersState {
     loading: boolean;
     totalOrders: number;
-    params: object;
-    orders: UserType[];
+    orders: OrderType[];
     getOrders: () => void;
-    deleteOrder: (id: string) => void;
-    setParams: (params: object) => void;
-    setPage: (pg: number) => void;
+    cancelOrder: (id: string) => void;
+    confirmOrder: (id: string) => void;
 }
 
 const useOrders = create<UsersState>()((set, get) => ({
@@ -28,30 +26,33 @@ const useOrders = create<UsersState>()((set, get) => ({
         await request.get("payment", {
             headers: {
             "Authorization": "Bearer " + getCookie("token")
-        }, params: get().params}).then(res => {
+        }}).then(res => {
             console.log(res.data)
             set((state) => ({...state, orders: res.data, totalOrders: res.data.length}))
         set((state) => ({...state, loading: false}))
         })
     },
-    deleteOrder: async (id) => {
-        await request.delete(`payment/${id}`, {
+    cancelOrder: async (id) => {
+        await request.put(`payment/${id}`, {}, {
             headers: {
-            "Authorization": "Bearer " + getCookie("token")
+                "Authorization": "Bearer " + getCookie("token")
             }
         }).then(res => {
-            toast.success(JSON.stringify(res));
+            console.log(res.data)
             get().getOrders();
         });
     },
-    setParams: (param) => {
-        set(state => ({...state, params: {...get().params, ...param}}))
-        get().getOrders()
-    },
-    setPage: (pg) => {
-        set(state => ({...state, params: {...get().params, page: pg}}))
-        get().getOrders()
-    },
+    confirmOrder: async(id) => {
+        console.log(getCookie("token"))
+        await request.post(`payment/${id}`, {}, {
+            headers: {
+                "Authorization": "Bearer " + getCookie("token")
+            }
+        }).then(res => {
+            console.log(res.data)
+            get().getOrders()
+        })
+    }
 }));
 
 export default useOrders;
