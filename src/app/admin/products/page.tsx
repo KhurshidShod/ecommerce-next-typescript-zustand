@@ -15,7 +15,7 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const AdminProductsPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [selected, setSelected] = useState(null);
+    const [selected, setSelected] = useState<string | null>(null);
     const { categories, getCategories } = useCategories();
     const {loading, totalProducts, products, createProduct, editProduct, getProduct, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
     const formik = useFormik({
