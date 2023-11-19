@@ -2,9 +2,8 @@ import { create } from "zustand";
 import { toast } from "react-toastify";
 import {getCookie} from 'cookies-next'
 import request from "@/server/request";
-import UserType from '@/types/User'
 import Product from "@/types/Product";
-import ProductCreating from "@/types/Product";
+import ProductCreating from "@/types/ProductCreate";
 
 interface AdminProductsState {
     loading: boolean;
@@ -66,6 +65,7 @@ const useProductsAdmin = create<AdminProductsState>()((set, get) => ({
           formik.setFieldValue("description", res.data.description)
           formik.setFieldValue("category", res.data.category)
           formik.setFieldValue("image", res.data.image)
+          console.log(res.data)
         })
       },
       editProduct: async(id, product) => {

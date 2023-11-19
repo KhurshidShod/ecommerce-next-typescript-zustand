@@ -22,8 +22,8 @@ const AdminProductsPage = () => {
         initialValues: {
             title: "",
             description: "",
-            price: "",
-            quantity: "",
+            price: 0,
+            quantity: 0,
             category: "",
             image: {
                 public_id: "",
@@ -31,6 +31,7 @@ const AdminProductsPage = () => {
             }
         },
           onSubmit: (values) => {
+
               if(selected === null){
                 createProduct(values)
               } else {
@@ -46,7 +47,7 @@ const AdminProductsPage = () => {
         setSelected(id)
         setModalOpen(true)
     }
-    const uploadProductImage = async(file) => {
+    const uploadProductImage = async(file: any) => {
         const formData = new FormData();
         formData.append("file", file);
         console.log(formData)
@@ -54,7 +55,9 @@ const AdminProductsPage = () => {
             headers: {
                 "Authorization": "Bearer " + getCookie("token")
             }
-        }).then(res => formik.setFieldValue("image", res.data))
+        }).then(res => {
+            formik.setFieldValue("image", res.data)
+        })
     }
     useEffect(() => {
         getProducts()

@@ -5,7 +5,7 @@ export default interface Product {
   };
   title: string;
   description: string;
-  price: string;
+  price: number;
   quantity: number;
   sold: number;
   image: {
@@ -15,17 +15,4 @@ export default interface Product {
   updatedAt: string;
   checked: false;
   createdAt: string
-}
-export default interface ProductCreating {
-  category: {
-    name: string
-  };
-  title: string;
-  description: string;
-  price: string;
-  quantity: number;
-  image: {
-    public_id: string;
-    url: string;
-  };
 }
