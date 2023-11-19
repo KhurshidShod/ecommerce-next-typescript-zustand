@@ -6,21 +6,23 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 import useProductsAdmin from "@/store/productsAdmin"
 import styles from './AdminProducts.module.scss'
 import Skeleton from '@mui/material/Skeleton';
-import Stack from '@mui/material/Stack';
+import useCategories from "@/store/categories";
 import Image from "next/image";
 import PaginationComponent from '@/components/pagination';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const AdminProductsPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState(null);
+  const { categories, getCategories } = useCategories();
     const {loading, totalProducts, products, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
     const formik = useFormik({
         initialValues: {
-            firstName: "",
-            lastName: "",
-            username: "",
-            phoneNumber: "",
-            password: "",
+            title: "",
+            description: "",
+  price: "",
+  quantity: "",
+  category: ""
         },
           onSubmit: (values) => {
             //   if(selected === null){
@@ -33,7 +35,8 @@ const AdminProductsPage = () => {
       })
     useEffect(() => {
         getProducts()
-    }, [getProducts])
+        getCategories()
+    }, [getProducts, getCategories])
     console.log(products)
     return (
         <section className={styles.admin_products__wrapper}>
@@ -46,32 +49,42 @@ const AdminProductsPage = () => {
                     }}><IoIosCloseCircleOutline /></span>
                 <form onSubmit={formik.handleSubmit}>
                     <div>
-                        <label htmlFor="firstName">Firstname</label>
+                        <label htmlFor="title">Title</label>
                         <input 
                         onChange={formik.handleChange}
-                        defaultValue={formik.values.firstName}
-                         id="firstName" name="firstName" />
+                        defaultValue={formik.values.title}
+                         id="title" name="title" />
                     </div>
                     <div>
-                        <label htmlFor="lastName">Lastname</label>
-                        <input
+                        <label htmlFor="price">Price</label>
+                        <input type="number"
                         onChange={formik.handleChange}
-                        defaultValue={formik.values.lastName}
-                         id="lastName" name="lastName" />
+                        defaultValue={formik.values.price}
+                         id="price" name="price" />
                     </div>
                     <div>
-                        <label htmlFor="username">Username</label>
-                        <input 
+                        <label htmlFor="quantity">Quantity</label>
+                        <input type="number"
                         onChange={formik.handleChange}
-                        defaultValue={formik.values.username}
-                         id="username" name="username" />
+                        defaultValue={formik.values.quantity}
+                         id="quantity" name="quantity" />
                     </div>
                     <div>
-                        <label htmlFor="phoneNumber">Phone number</label>
-                        <input 
-                        onChange={formik.handleChange}
-                        defaultValue={formik.values.phoneNumber}
-                        id="phoneNumber" name="phoneNumber" />
+                    <select
+          name="category"
+          id="category"
+          onChange={formik.handleChange}
+                        defaultValue={formik.values.category}
+        >
+          <option defaultValue="" selected disabled>
+            Categoriy
+          </option>
+          {categories.map((cat) => (
+            <option value={cat?._id} key={cat?._id}>
+              {cat?.name}
+            </option>
+          ))}
+        </select>
                     </div>
                     <div>
                         <label htmlFor="password">Password</label>
@@ -89,7 +102,7 @@ const AdminProductsPage = () => {
             <div className="container">
             <div className={styles.admin_products__wrapper_header}>
             <input placeholder="Search..." onChange={(e) => setParams({search: e.target.value})} />
-            <button><MdOutlineAddShoppingCart /></button>
+            <button onClick={() => setModalOpen(true)}><MdOutlineAddShoppingCart /></button>
             </div>
                 <div className={styles.admin_products__wrapper_table}>
                         <ul className={styles.admin_products__wrapper_table_header}>
