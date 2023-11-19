@@ -4,6 +4,10 @@
     height: calc(100vh - 90px);
     top: 90px;
     left: 250px;
+    @media (max-width: 750px){
+        width: calc(100% - 75px);
+        left: 75px;
+    }
     &.collapsed{
     width: calc(100% - 75px);
     left: 75px;

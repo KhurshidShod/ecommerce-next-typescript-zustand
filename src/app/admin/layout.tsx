@@ -9,21 +9,22 @@ import styles from './AdminLayout.module.scss';
 
 import "../globals.css";
 import "react-toastify/dist/ReactToastify.css";
+import withAuth from '@/hoc/with-auth';
 
-export default function RootLayout({
+function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const {user} = useAuth()
-  const router = useRouter()
+  // const {user} = useAuth()
+  // const router = useRouter()
   const [collapsed, setCollapsed] = useState<any>(false);
-  useEffect(() => {
-    console.log(user)
-    if(user.role === 0){
-      router.push('/')
-    }
-  }, [user, router])
+  // useEffect(() => {
+  //   console.log(user)
+  //   if(user.role === 0){
+  //     router.push('/')
+  //   }
+  // }, [user, router])
   return (
     <html lang="en">
       <body>
@@ -37,3 +38,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+export default withAuth(AdminLayout)
