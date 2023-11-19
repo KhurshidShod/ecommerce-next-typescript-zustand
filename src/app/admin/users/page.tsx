@@ -11,7 +11,7 @@ import PaginationComponent from '@/components/pagination';
 
 const AdminUsersPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
-    const [selected, setSelected] = useState(null)
+    const [selected, setSelected] = useState<string | null>(null)
     const {totalUsers, loading, users, createUser, editUser, getUser, getUsers, setPage, deleteUser, setParams} = useUsers();
       const formik = useFormik({
         initialValues: {
@@ -38,7 +38,7 @@ const AdminUsersPage = () => {
               formik.resetForm()
             },
       })
-    const editUserForm = (id) => {
+    const editUserForm = (id: string) => {
         getUser(id, formik)
         setSelected(id)
         setModalOpen(true)
