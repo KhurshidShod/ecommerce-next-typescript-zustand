@@ -3,6 +3,7 @@ import { usePathname } from 'next/navigation';
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUsers, FaMoneyBillTrendUp } from "react-icons/fa6";
 import { FaShoppingBasket } from "react-icons/fa";
+import { BiSolidCategory } from "react-icons/bi";
 import Link from 'next/link';
 import styles from './AdminSidebar.module.scss';
 
@@ -88,6 +89,7 @@ const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
                 <li className={(pathname === "/admin/users" || pathname === "/admin/users/") ? styles.activeAdmin : ''}><Link href="/admin/users"><span><FaUsers /></span>Users</Link></li>
                 <li className={(pathname === "/admin/products" || pathname === "/admin/products/") ? styles.activeAdmin : ''}><Link href="/admin/products"><span><FaShoppingBasket /></span>Products</Link></li>
                 <li className={(pathname === "/admin/orders" || pathname === "/admin/orders/") ? styles.activeAdmin : ''}><Link href="/admin/orders"><span><FaMoneyBillTrendUp /></span>Orders</Link></li>
+                <li className={(pathname === "/admin/categories" || pathname === "/admin/categories/") ? styles.activeAdmin : ''}><Link href="/admin/categories"><span><BiSolidCategory /></span>Categories</Link></li>
               </ul>
             </div>
         </div>

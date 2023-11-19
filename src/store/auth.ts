@@ -59,7 +59,11 @@ const useAuth = create<AuthState>()((set, get) => ({
       set((state) => ({...state, token: res.data.accesstoken, user: res.data.user}))
         get().setIsAuth(true)
         toast.success("Logged in successfully")
-        router.push('/')
+        if(res.data.user.role === 1){
+          router.push('/admin')
+        } else {
+          router.push('/')
+        }
     })
     .catch(err => {
         toast.error(err.response.data.msg)

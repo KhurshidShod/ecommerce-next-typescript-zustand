@@ -129,7 +129,7 @@ const AdminProductsPage = () => {
                          id="description" name="description" />
                     </div>
                     <div>
-                        <button>{selected === null ? 'Add user' : 'Save user'}</button>
+                        <button>{selected === null ? 'Add product' : 'Save product'}</button>
                     </div>
                 </form>
                 </div>
