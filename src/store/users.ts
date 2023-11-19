@@ -14,7 +14,9 @@ interface UsersState {
     deleteUser: (id: string) => void;
     setParams: (params: object) => void;
     setPage: (pg: number) => void;
-    getUser: (id: string, formik: object) => void;
+    getUser: (id: string, formik: {
+        setFieldValue: (field: string, value: string) => void
+    }) => void;
     editUser: (id: string, user: object) => void;
     createUser: (user: object) => void;
 }

@@ -6,7 +6,9 @@ import { MdOutlineAddShoppingCart } from "react-icons/md";
 import useProductsAdmin from "@/store/productsAdmin"
 import styles from './AdminProducts.module.scss'
 import Skeleton from '@mui/material/Skeleton';
+import {getCookie} from 'cookies-next'
 import useCategories from "@/store/categories";
+import request from "@/server/request";
 import Image from "next/image";
 import PaginationComponent from '@/components/pagination';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
@@ -14,25 +16,46 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 const AdminProductsPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
-  const { categories, getCategories } = useCategories();
-    const {loading, totalProducts, products, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
+    const { categories, getCategories } = useCategories();
+    const {loading, totalProducts, products, editProduct, getProduct, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
     const formik = useFormik({
         initialValues: {
             title: "",
             description: "",
-  price: "",
-  quantity: "",
-  category: ""
+            price: "",
+            quantity: "",
+            category: "",
+            image: {
+                public_id: "",
+                url: ""
+            }
         },
           onSubmit: (values) => {
-            //   if(selected === null){
-            //   } else {
-            //   }
+              if(selected === null){
+                console.log(values)
+              } else {
+                editProduct(selected, values);
+              }
               setModalOpen(false);
               setSelected(null)
               formik.resetForm()
             },
       })
+      const editProductForm = (id: string) => {
+        getProduct(id, formik)
+        setSelected(id)
+        setModalOpen(true)
+    }
+    const uploadProductImage = async(file) => {
+        const formData = new FormData();
+        formData.append("file", file);
+        console.log(formData)
+        await request.post("upload", formData, {
+            headers: {
+                "Authorization": "Bearer " + getCookie("token")
+            }
+        }).then(res => formik.setFieldValue("image", res.data))
+    }
     useEffect(() => {
         getProducts()
         getCategories()
@@ -48,6 +71,9 @@ const AdminProductsPage = () => {
                     formik.resetForm()
                     }}><IoIosCloseCircleOutline /></span>
                 <form onSubmit={formik.handleSubmit}>
+                    <input style={{
+                        backgroundImage: "url(" + formik.values.image.url + ")"
+                    }} defaultValue={formik.values.image.url} type="file" onChange={(e) => uploadProductImage(e?.target?.files[0])} />
                     <div>
                         <label htmlFor="title">Title</label>
                         <input 
@@ -70,28 +96,31 @@ const AdminProductsPage = () => {
                          id="quantity" name="quantity" />
                     </div>
                     <div>
+                    <label htmlFor="category">Category</label>
                     <select
           name="category"
           id="category"
           onChange={formik.handleChange}
-                        defaultValue={formik.values.category}
+            defaultValue={formik.values.category}
         >
-          <option defaultValue="" selected disabled>
+          <option value="" selected disabled>
             Categoriy
           </option>
           {categories.map((cat) => (
-            <option value={cat?._id} key={cat?._id}>
+            <option selected={formik.values.category === cat?._id} value={cat?._id} key={cat?._id}>
               {cat?.name}
             </option>
           ))}
         </select>
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label>
-                        <input 
+                        <label htmlFor="description">Description</label>
+                        <textarea
+                        placeholder="Description of product"
+                        rows={5}
                         onChange={formik.handleChange}
-                        defaultValue={formik.values.password}
-                        id="password" name="password" />
+                        defaultValue={formik.values.description}
+                         id="description" name="description" />
                     </div>
                     <div>
                         <button>{selected === null ? 'Add user' : 'Save user'}</button>
@@ -146,7 +175,7 @@ const AdminProductsPage = () => {
                             <li>{product.quantity}</li>
                             <li>{product.sold}</li>
                             <li>
-                                <button><MdEdit /></button>
+                                <button onClick={() => editProductForm(product._id)}><MdEdit /></button>
                                 <button onClick={() => deleteProduct(product._id)}><MdDelete /></button>
                             </li>
                         </ul>)}

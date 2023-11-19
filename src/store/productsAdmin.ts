@@ -14,6 +14,11 @@ interface AdminProductsState {
     deleteProduct: (id: string) => void;
     setParams: (params: object) => void;
     setPage: (pg: number) => void;
+    getProduct: (id: string, formik: {
+        setFieldValue: (field: string, value: string) => void
+    }) => void;
+    editProduct: (id: string, product: Product) => void;
+    createProduct: (product: Product) => void;
 }
 
 const useProductsAdmin = create<AdminProductsState>()((set, get) => ({
@@ -52,6 +57,34 @@ const useProductsAdmin = create<AdminProductsState>()((set, get) => ({
         set(state => ({...state, params: {...get().params, page: pg}}))
         get().getProducts()
     },
+    getProduct: async (id, formik) => {
+        await request.get(`product/${id}`).then(res => {
+          formik.setFieldValue("title", res.data.title)
+          formik.setFieldValue("price", res.data.price)
+          formik.setFieldValue("quantity", res.data.quantity)
+          formik.setFieldValue("description", res.data.description)
+          formik.setFieldValue("category", res.data.category)
+          formik.setFieldValue("image", res.data.image)
+        })
+      },
+      editProduct: async(id, product) => {
+        await request.put(`product/${id}`, product, {
+            headers: {
+                "Authorization": "Bearer " + getCookie("token")
+            }
+        }).then(res => {
+        get().getProducts()
+        })
+      },
+      createProduct: async(product) => {
+        await request.post(`product`, product, {
+            headers: {
+                "Authorization": "Bearer " + getCookie("token")
+            }
+        }).then(res => {
+        get().getProducts()
+        })
+      }
 }));
 
 export default useProductsAdmin;
