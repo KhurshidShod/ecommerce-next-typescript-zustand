@@ -4,6 +4,7 @@ import { getCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import request from "@/server/request";
 import { create } from "zustand";
+import useAuth from "./auth";
 
 interface CartState {
   cart: CartProductType[];
@@ -17,17 +18,22 @@ const cartCookie = getCookie("cart");
 const useCartProducts = create<CartState>()((set, get) => ({
   cart: JSON.parse(cartCookie !== undefined ? cartCookie : '[]'),
   addToCart: (product) => {
-    if(product.quantity > 0){
-      set((state) => ({...state,
-        cart: [...state.cart, {...product, cartQuantity: 1}],
-      }));
+    if(getCookie("token")){
+      if(product.quantity > 0){
+        set((state) => ({...state,
+          cart: [...state.cart, {...product, cartQuantity: 1}],
+        }));
+      } else {
+        toast.error("Not available now")
+      }
+      setCookie("cart", JSON.stringify(get().cart));
     } else {
-      toast.error("Not available now")
+      toast.error("Please login first!")
     }
-    setCookie("cart", JSON.stringify(get().cart));
   },
   removeFromCart: (id) => {
     set((state) => ({...state, cart: get().cart.filter((prod) => prod._id !== id) }));
+    setCookie("cart", JSON.stringify(get().cart));
   },
   increaseQuantity: (product) => {
     set((state) => ({...state,

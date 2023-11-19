@@ -176,7 +176,7 @@ const Header = () => {
               />
             </svg>{auth ? <Link href="/account">Account</Link> : <Link href="/login">Sign Up/Sign In</Link>}
           </div>
-          <Link href="/cart" className={styles.cartLink}>
+          <Link href={isAuth ? "/cart" : '#'} className={styles.cartLink}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

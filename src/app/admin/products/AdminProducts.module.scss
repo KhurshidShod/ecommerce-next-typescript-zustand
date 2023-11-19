@@ -123,22 +123,51 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
         padding: 0 1rem;
-        button{
-            width: 75px;
-            height: 32.5px;
+        div{
             display: flex;
-            justify-content: center;
+            justify-content: end;
             align-items: center;
-            font-size: 24px;
-            color: white;
-            background-color: green;
-            border: none;
-            outline: none;
-            border-radius: 5px;
-            cursor: pointer;
-            &:active{
-                transform: scale(0.95)
+            flex-wrap: wrap;
+            gap: .5rem;
+            button{
+                border-radius: 5px;
+                background-color: #27272A;
+                border: none;
+                outline: none;
+                padding: 0 5px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                cursor: pointer;
+            font-family: 'Montserrat';
+            flex-grow: .05;
+            height: 35px;
+                color: white;
+                span{
+                    display: flex;
+                    height: 20px;
+                    flex-direction: column;
+                    gap: 0px;
+                }
+                &:last-child{
+                    width: 75px;
+                    height: 32.5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 24px;
+                    color: white;
+                    background-color: green;
+                    border: none;
+                    outline: none;
+                    border-radius: 5px;
+                    cursor: pointer;
+                }
+                &:active{
+                    transform: scale(0.95)
+                }
             }
         }
         input{

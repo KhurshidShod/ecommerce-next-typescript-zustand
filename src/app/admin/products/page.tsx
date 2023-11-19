@@ -5,6 +5,7 @@ import { MdEdit, MdDelete } from "react-icons/md";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import useProductsAdmin from "@/store/productsAdmin"
 import styles from './AdminProducts.module.scss'
+import { BsFillCaretDownFill, BsFillCaretUpFill } from "react-icons/bs";
 import Skeleton from '@mui/material/Skeleton';
 import {getCookie} from 'cookies-next'
 import useCategories from "@/store/categories";
@@ -15,6 +16,9 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const AdminProductsPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
+    const [priceOrder, setPriceOrder] = useState<string>("def");
+  const [dateOrder, setDateOrder] = useState<string>("def");
+  const [salesOrder, setSalesOrder] = useState<string>("def");
     const [selected, setSelected] = useState<string | null>(null);
     const { categories, getCategories } = useCategories();
     const {loading, totalProducts, products, createProduct, editProduct, getProduct, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
@@ -75,7 +79,7 @@ const AdminProductsPage = () => {
                 <form onSubmit={formik.handleSubmit}>
                     <input style={{
                         backgroundImage: "url(" + formik.values.image.url + ")"
-                    }} defaultValue={formik.values.image.url} type="file" onChange={(e) => uploadProductImage(e?.target?.files[0])} />
+                    }} defaultValue={formik.values.image.url} type="file" onChange={(e) => uploadProductImage(e.target.files ? e.target.files[0] : null)} />
                     <div>
                         <label htmlFor="title">Title</label>
                         <input 
@@ -133,7 +137,113 @@ const AdminProductsPage = () => {
             <div className="container">
             <div className={styles.admin_products__wrapper_header}>
             <input placeholder="Search..." onChange={(e) => setParams({search: e.target.value})} />
+            <div>
+            <button
+          onClick={() => {
+            setDateOrder("def");
+            setSalesOrder("def");
+            setPriceOrder(
+              priceOrder === "def"
+                ? "asc"
+                : priceOrder === "asc"
+                ? "desc"
+                : "asc"
+            );
+            if (priceOrder === "asc") {
+              setParams({ sort: "-price" });
+            } else {
+              setParams({ sort: "price" });
+            }
+          }}
+        >
+          Price{" "}
+          <span>
+            <BsFillCaretUpFill
+              color={
+                priceOrder === "asc" || priceOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+            <BsFillCaretDownFill
+              color={
+                priceOrder === "desc" || priceOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+          </span>
+        </button>
+        <button
+          onClick={() => {
+            setPriceOrder("def");
+            setSalesOrder("def");
+            setDateOrder(
+              dateOrder === "def" ? "asc" : dateOrder === "asc" ? "desc" : "asc"
+            );
+            if (dateOrder === "asc") {
+              setParams({ sort: "oldest" });
+            } else {
+              setParams({ sort: "" });
+            }
+          }}
+        >
+          Date{" "}
+          <span>
+            <BsFillCaretUpFill
+              color={
+                dateOrder === "asc" || dateOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+            <BsFillCaretDownFill
+              color={
+                dateOrder === "desc" || dateOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+          </span>
+        </button>
+        <button
+          onClick={() => {
+            setPriceOrder("def");
+            setDateOrder("def");
+            setSalesOrder(
+              salesOrder === "def"
+                ? "asc"
+                : salesOrder === "asc"
+                ? "desc"
+                : "asc"
+            );
+            if (salesOrder === "asc") {
+              setParams({ sort: "-sold" });
+            } else {
+              setParams({ sort: "sold" });
+            }
+          }}
+        >
+          Sales{" "}
+          <span>
+            <BsFillCaretUpFill
+              color={
+                salesOrder === "asc" || salesOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+            <BsFillCaretDownFill
+              color={
+                salesOrder === "desc" || salesOrder === "def"
+                  ? "var(--blue)"
+                  : "#27272A"
+              }
+            />
+          </span>
+        </button>
             <button onClick={() => setModalOpen(true)}><MdOutlineAddShoppingCart /></button>
+            </div>
             </div>
                 <div className={styles.admin_products__wrapper_table}>
                         <ul className={styles.admin_products__wrapper_table_header}>

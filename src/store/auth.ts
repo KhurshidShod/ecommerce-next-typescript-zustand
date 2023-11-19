@@ -2,7 +2,7 @@ import create, { StateCreator } from "zustand";
 import request from "../server/request";
 import UserType from "@/types/User";
 import { toast } from "react-toastify";
-import { CookieValueTypes, getCookie, setCookie } from "cookies-next";
+import { CookieValueTypes, deleteCookie, getCookie, setCookie } from "cookies-next";
 
 interface AuthState {
   loading: boolean;
@@ -19,6 +19,7 @@ interface AuthState {
   login: (user: object, router: any) => void;
   setIsAuth: (bool: boolean) => void;
   editUserData: (data: object) => void;
+  logout: (router: any) => void;
 }
 
 const userCookie = getCookie("user");
@@ -78,6 +79,11 @@ const useAuth = create<AuthState>()((set, get) => ({
       toast.success("User data changed successfully")
     }).catch(err => toast.error("Something went wrong. Try again later"));
   },
+  logout: (router) => {
+    deleteCookie("token");
+    deleteCookie("user");
+    router.push('/')
+  }
 }));
 
 export default useAuth;
