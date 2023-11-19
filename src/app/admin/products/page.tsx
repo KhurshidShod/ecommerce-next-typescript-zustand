@@ -1,5 +1,6 @@
 "use client";
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useFormik } from 'formik'
 import { MdEdit, MdDelete } from "react-icons/md";
 import { MdOutlineAddShoppingCart } from "react-icons/md";
 import useProductsAdmin from "@/store/productsAdmin"
@@ -10,13 +11,81 @@ import Image from "next/image";
 import PaginationComponent from '@/components/pagination';
 
 const AdminProductsPage = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selected, setSelected] = useState(null)
     const {loading, totalProducts, products, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
+    const formik = useFormik({
+        initialValues: {
+            firstName: "",
+            lastName: "",
+            username: "",
+            phoneNumber: "",
+            password: "",
+        },
+          onSubmit: (values) => {
+            //   if(selected === null){
+            //   } else {
+            //   }
+              setModalOpen(false);
+              setSelected(null)
+              formik.resetForm()
+            },
+      })
     useEffect(() => {
         getProducts()
     }, [getProducts])
     console.log(products)
     return (
         <section className={styles.admin_products__wrapper}>
+            {modalOpen ? <div className={styles.addModal}>
+                <div className="container">
+                <span onClick={() => {
+                    setModalOpen(false)
+                    setSelected(null)
+                    formik.resetForm()
+                    }}><IoIosCloseCircleOutline /></span>
+                <form onSubmit={formik.handleSubmit}>
+                    <div>
+                        <label htmlFor="firstName">Firstname</label>
+                        <input 
+                        onChange={formik.handleChange}
+                        defaultValue={formik.values.firstName}
+                         id="firstName" name="firstName" />
+                    </div>
+                    <div>
+                        <label htmlFor="lastName">Lastname</label>
+                        <input
+                        onChange={formik.handleChange}
+                        defaultValue={formik.values.lastName}
+                         id="lastName" name="lastName" />
+                    </div>
+                    <div>
+                        <label htmlFor="username">Username</label>
+                        <input 
+                        onChange={formik.handleChange}
+                        defaultValue={formik.values.username}
+                         id="username" name="username" />
+                    </div>
+                    <div>
+                        <label htmlFor="phoneNumber">Phone number</label>
+                        <input 
+                        onChange={formik.handleChange}
+                        defaultValue={formik.values.phoneNumber}
+                        id="phoneNumber" name="phoneNumber" />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <input 
+                        onChange={formik.handleChange}
+                        defaultValue={formik.values.password}
+                        id="password" name="password" />
+                    </div>
+                    <div>
+                        <button>{selected === null ? 'Add user' : 'Save user'}</button>
+                    </div>
+                </form>
+                </div>
+            </div> : null}
             <div className="container">
             <div className={styles.admin_products__wrapper_header}>
             <input placeholder="Search..." onChange={(e) => setParams({search: e.target.value})} />
