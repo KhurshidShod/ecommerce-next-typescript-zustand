@@ -57,7 +57,7 @@ const AdminProductsPage = () => {
                             <Skeleton sx={{ bgcolor: 'grey.900' }} variant="rounded" width={'35px'} height={'35px'} />
                             </div>
                         </div>) :products.map(product => <ul key={product._id}>
-                            <li><Image src={product.image.url} width={35} height={35} /></li>
+                            <li><Image alt="Image" src={product.image.url} width={35} height={35} /></li>
                             <li>{product.title}</li>
                             <li>{product.category.name}</li>
                             <li>{product.price}</li>
