@@ -1,12 +1,13 @@
 "use client";
 import useAuth from "@/store/auth"
 import { useRouter } from "next/navigation"
+import styles from '../../app/(public)/account/AccountPage.module.scss'
 
 const LogoutButton = () => {
     const router = useRouter()
     const {logout} = useAuth()
   return (
-    <button onClick={() => logout(router)}>Logout</button>
+    <button className={styles.logoutBtn} onClick={() => logout(router)}>Logout</button>
   )
 }
 
