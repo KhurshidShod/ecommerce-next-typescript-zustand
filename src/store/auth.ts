@@ -11,6 +11,7 @@ interface AuthState {
     lastName: string;
     username: string;
     phoneNumber: string;
+    role: number
   };
   token: string | CookieValueTypes;
   isAuth: boolean;
