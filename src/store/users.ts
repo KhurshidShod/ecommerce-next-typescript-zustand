@@ -9,12 +9,12 @@ interface UsersState {
     totalUsers: number;
     params: object;
     users: UserType[];
-    user: UserType;
+    user: UserType | object;
     getUsers: () => void;
     deleteUser: (id: string) => void;
     setParams: (params: object) => void;
     setPage: (pg: number) => void;
-    getUser: (id: string, formik) => void;
+    getUser: (id: string, formik: object) => void;
     editUser: (id: string, user: object) => void;
     createUser: (user: object) => void;
 }
@@ -53,7 +53,7 @@ const useUsers = create<UsersState>()((set, get) => ({
             headers: {
             "Authorization": "Bearer " + getCookie("token")
         }}).then(res => {
-            console.log(res.data)
+            console.log(typeof formik)
             formik.setFieldValue("firstName", res.data.firstName)
             formik.setFieldValue("lastName", res.data.lastName)
             formik.setFieldValue("username", res.data.username)
