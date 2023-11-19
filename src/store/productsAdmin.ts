@@ -4,6 +4,7 @@ import {getCookie} from 'cookies-next'
 import request from "@/server/request";
 import UserType from '@/types/User'
 import Product from "@/types/Product";
+import ProductCreating from "@/types/Product";
 
 interface AdminProductsState {
     loading: boolean;
@@ -17,8 +18,8 @@ interface AdminProductsState {
     getProduct: (id: string, formik: {
         setFieldValue: (field: string, value: string) => void
     }) => void;
-    editProduct: (id: string, product: Product) => void;
-    createProduct: (product: Product) => void;
+    editProduct: (id: string, product: ProductCreating) => void;
+    createProduct: (product: ProductCreating) => void;
 }
 
 const useProductsAdmin = create<AdminProductsState>()((set, get) => ({

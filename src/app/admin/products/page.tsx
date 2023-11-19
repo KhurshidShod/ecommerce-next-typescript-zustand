@@ -17,7 +17,7 @@ const AdminProductsPage = () => {
     const [modalOpen, setModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const { categories, getCategories } = useCategories();
-    const {loading, totalProducts, products, editProduct, getProduct, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
+    const {loading, totalProducts, products, createProduct, editProduct, getProduct, getProducts, deleteProduct, setParams, setPage} = useProductsAdmin()
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -32,7 +32,7 @@ const AdminProductsPage = () => {
         },
           onSubmit: (values) => {
               if(selected === null){
-                console.log(values)
+                createProduct(values)
               } else {
                 editProduct(selected, values);
               }
@@ -60,7 +60,6 @@ const AdminProductsPage = () => {
         getProducts()
         getCategories()
     }, [getProducts, getCategories])
-    console.log(products)
     return (
         <section className={styles.admin_products__wrapper}>
             {modalOpen ? <div className={styles.addModal}>

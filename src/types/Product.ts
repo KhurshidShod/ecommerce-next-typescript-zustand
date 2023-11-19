@@ -16,3 +16,16 @@ export default interface Product {
   checked: false;
   createdAt: string
 }
+export default interface ProductCreating {
+  category: {
+    name: string
+  };
+  title: string;
+  description: string;
+  price: string;
+  quantity: number;
+  image: {
+    public_id: string;
+    url: string;
+  };
+}
