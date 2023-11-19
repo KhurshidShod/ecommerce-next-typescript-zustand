@@ -6,6 +6,7 @@ export default interface UserType {
     role: number;
     updatedAt: string;
     username: string;
+    password: string;
     __v: string;
     _id: string;
 }

@@ -1,10 +1,13 @@
-import styles from './AdminSidebar.module.scss';
+"use client";
+import { usePathname } from 'next/navigation';
 import { AiFillDashboard } from "react-icons/ai";
 import { FaUsers, FaMoneyBillTrendUp } from "react-icons/fa6";
 import { FaShoppingBasket } from "react-icons/fa";
 import Link from 'next/link';
+import styles from './AdminSidebar.module.scss';
 
 const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
+  const pathname = usePathname()
     return (
         <div className={`${styles.adminSidebar} ${collapsed ? styles.collapsed : ''}`}>
             <div className={styles.adminSidebar__logo}>
@@ -81,10 +84,10 @@ const AdminSidebar = ({collapsed}: {collapsed: boolean}) => {
             </div>
             <div className={styles.adminSidebar__menu}>
               <ul>
-                <li><Link href="/admin"><span><AiFillDashboard /></span>Dashboard</Link></li>
-                <li><Link href="/admin/users"><span><FaUsers /></span>Users</Link></li>
-                <li><Link href="/admin/products"><span><FaShoppingBasket /></span>Products</Link></li>
-                <li><Link href="/admin/orders"><span><FaMoneyBillTrendUp /></span>Orders</Link></li>
+                <li className={(pathname === "/admin" || pathname === "/admin/") ? styles.activeAdmin : ''}><Link href="/admin"><span><AiFillDashboard /></span>Dashboard</Link></li>
+                <li className={(pathname === "/admin/users" || pathname === "/admin/users/") ? styles.activeAdmin : ''}><Link href="/admin/users"><span><FaUsers /></span>Users</Link></li>
+                <li className={(pathname === "/admin/products" || pathname === "/admin/products/") ? styles.activeAdmin : ''}><Link href="/admin/products"><span><FaShoppingBasket /></span>Products</Link></li>
+                <li className={(pathname === "/admin/orders" || pathname === "/admin/orders/") ? styles.activeAdmin : ''}><Link href="/admin/orders"><span><FaMoneyBillTrendUp /></span>Orders</Link></li>
               </ul>
             </div>
         </div>

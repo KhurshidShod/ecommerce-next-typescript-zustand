@@ -1,19 +1,33 @@
 "use client";
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation';
+import { ToastContainer } from "react-toastify";
 import AdminHeader from "@/components/admin-header";
-import "../globals.css";
 import AdminSidebar from "@/components/admin-sidebar";
+import useAuth from '@/store/auth';
 import styles from './AdminLayout.module.scss';
+
+import "../globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [collapsed, setCollapsed] = useState<any>(false)
+  const {user} = useAuth()
+  const router = useRouter()
+  const [collapsed, setCollapsed] = useState<any>(false);
+  useEffect(() => {
+    console.log(user)
+    if(user.role === 0){
+      router.push('/')
+    }
+  }, [user, router])
   return (
     <html lang="en">
       <body>
+      <ToastContainer />
         <AdminHeader collapsed={collapsed} setCollapse={() => setCollapsed(!collapsed)} />
         <AdminSidebar collapsed={collapsed} />
         <div className={`${styles.adminContent} ${collapsed ? styles.collapsed : ''}`}>

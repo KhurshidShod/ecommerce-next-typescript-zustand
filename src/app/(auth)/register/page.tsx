@@ -30,8 +30,7 @@ const RegisterPage = () => {
       password: ''
     },
     onSubmit: (values) => {
-      register(values)
-        router.push("/")
+      register(values, router)
     },
   });
   return (

@@ -3,55 +3,55 @@ import { toast } from "react-toastify";
 import {getCookie} from 'cookies-next'
 import request from "@/server/request";
 import UserType from '@/types/User'
+import Product from "@/types/Product";
 
-interface UsersState {
+interface AdminProductsState {
     loading: boolean;
-    totalOrders: number;
+    totalProducts: number;
     params: object;
-    orders: UserType[];
-    getOrders: () => void;
-    deleteOrder: (id: string) => void;
+    products: Product[];
+    getProducts: () => void;
+    deleteProduct: (id: string) => void;
     setParams: (params: object) => void;
     setPage: (pg: number) => void;
 }
 
-const useOrders = create<UsersState>()((set, get) => ({
+const useProductsAdmin = create<AdminProductsState>()((set, get) => ({
     loading: false,
-    totalOrders: 0,
-    orders: [],
+    totalProducts: 0,
+    products: [],
     params: {
         page: 1,
         limit: 8
     },
-    getOrders: async() => {
+    getProducts: async() => {
         set((state) => ({...state, loading: true}))
-        await request.get("payment", {
+        await request.get("product", {
             headers: {
             "Authorization": "Bearer " + getCookie("token")
         }, params: get().params}).then(res => {
-            console.log(res.data)
-            set((state) => ({...state, orders: res.data, totalOrders: res.data.length}))
+            set((state) => ({...state, products: res.data.products, totalProducts: res.data.total}))
         set((state) => ({...state, loading: false}))
         })
     },
-    deleteOrder: async (id) => {
-        await request.delete(`payment/${id}`, {
+    deleteProduct: async (id) => {
+        await request.delete(`product/${id}`, {
             headers: {
             "Authorization": "Bearer " + getCookie("token")
             }
         }).then(res => {
-            toast.success(JSON.stringify(res));
-            get().getOrders();
+            toast.success(res.data.msg);
+            get().getProducts();
         });
     },
     setParams: (param) => {
         set(state => ({...state, params: {...get().params, ...param}}))
-        get().getOrders()
+        get().getProducts()
     },
     setPage: (pg) => {
         set(state => ({...state, params: {...get().params, page: pg}}))
-        get().getOrders()
+        get().getProducts()
     },
 }));
 
-export default useOrders;
+export default useProductsAdmin;

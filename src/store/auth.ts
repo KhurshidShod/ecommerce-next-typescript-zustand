@@ -29,7 +29,7 @@ const useAuth = create<AuthState>()((set, get) => ({
   setIsAuth: (bool) => {
     set((state) => ({...state, isAuth: bool}))
   },
-  register: async (user) => {
+  register: async (user, router) => {
     set((state) => ({ ...state, loading: true }));
     await request
       .post("auth/register", user)
@@ -39,9 +39,10 @@ const useAuth = create<AuthState>()((set, get) => ({
         get().setIsAuth(true)
         set((state) => ({...state, token: res.data.accesstoken, user: res.data.user}))
         toast.success("Registered successfully")
+        router.push('/')
     })
       .catch(err => {
-        toast.error(err.response.data.msg)
+        console.log(err)
       })
       .finally(() => {
         set((state) => ({ ...state, loading: true }));
