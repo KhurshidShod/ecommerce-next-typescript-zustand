@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useRouter, usePathname } from "next/navigation";
 import useAuth from '@/store/auth';
 
-function withAuth<P>(
+function withAuth<P extends React.ComponentType>(
     Component: React.ComponentType<P>
 ){
     const AuthComponent = (props: P) => {
