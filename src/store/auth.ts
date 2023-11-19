@@ -20,6 +20,10 @@ interface AuthState {
   setIsAuth: (bool: boolean) => void;
   editUserData: (data: object) => void;
   logout: (router: any) => void;
+  changePassword: (pass: {
+    currentPassword: string,
+    newPassword: string
+  }, setChangePassVisible: any, setPassword: any) => void;
 }
 
 const userCookie = getCookie("user");
@@ -88,6 +92,20 @@ const useAuth = create<AuthState>()((set, get) => ({
     deleteCookie("user");
     set((state) => ({...state, isAuth: false}))
     router.push('/');
+  },
+  changePassword: async(pass, setChangePassVisible, setPassword) => {
+    set((state) => ({ ...state, loading: true }));
+    await request.put("auth/password", pass, {
+      headers: {
+      "Authorization": "Bearer " + get().token
+      }
+    }).then((res) => {
+      toast.success('Password changed successfully')
+      setPassword({currentPassword: "", newPassword: ""})
+      setChangePassVisible(false)
+    }).catch(err => toast.error(err.response.data.msg)).finally(() => {
+      set((state) => ({ ...state, loading: false }));
+    })
   }
 }));
 
