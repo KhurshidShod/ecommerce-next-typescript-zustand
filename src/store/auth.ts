@@ -86,7 +86,8 @@ const useAuth = create<AuthState>()((set, get) => ({
   logout: (router) => {
     deleteCookie("token");
     deleteCookie("user");
-    router.push('/')
+    set((state) => ({...state, isAuth: false}))
+    router.push('/');
   }
 }));
 

@@ -1,9 +1,10 @@
 "use client";
 
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { useFormik } from "formik";
 import { Space_Grotesk } from "next/font/google";
 import { ToastContainer } from "react-toastify";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 import Img from "@/assets/images/log-reg.png";
 import Image from "next/image";
@@ -22,7 +23,8 @@ const font = Space_Grotesk({
 });
 
 const LoginPage = () => {
-  const router = useRouter()
+  const router = useRouter();
+  const [passVisible, setPassVisible] = useState<boolean>(false)
   const {loading, login, user} = useAuth();
   console.log(user)
 
@@ -61,10 +63,11 @@ const LoginPage = () => {
                 onChange={formik.handleChange}
                 value={formik.values.password}
                 className={font.className}
-                type="text"
+                type={passVisible ? "text" : "password"}
                 name="password"
                 id="password"
               />
+              <p onClick={() => setPassVisible(!passVisible)}>{passVisible ? <AiFillEyeInvisible /> : <AiFillEye />}</p>
             </div>
             <div>
               <button disabled={loading} type="submit" className={font.className}>{loading ? 'Logging in...' : 'Log in'}</button>
