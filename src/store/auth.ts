@@ -14,7 +14,7 @@ interface AuthState {
   };
   token: string | CookieValueTypes;
   isAuth: boolean;
-  register: (user: object) => void;
+  register: (user: object, router: any) => void;
   login: (user: object, router: any) => void;
   setIsAuth: (bool: boolean) => void;
   editUserData: (data: object) => void;

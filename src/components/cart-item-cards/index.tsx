@@ -6,10 +6,10 @@ import Image from 'next/image';
 import { MdDelete } from "react-icons/md";
 
 const CartItemCards = () => {
-  const {cart, removeFromCart} = useCartProducts();
+  const {cart, removeFromCart, confirmCart} = useCartProducts();
   const [comment, setComment] = useState("")
   const submitCart = () => {
-    console.log({cart: [...cart.map(el => {
+    confirmCart({cart: [...cart.map(el => {
       return {product: el._id, quantity: el.cartQuantity}
     })], comment})
   }

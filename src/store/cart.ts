@@ -2,6 +2,7 @@ import { CartProductType } from "@/types/CartItem";
 import Product from "@/types/Product";
 import { getCookie, setCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import request from "@/server/request";
 import { create } from "zustand";
 
 interface CartState {
@@ -10,6 +11,7 @@ interface CartState {
   increaseQuantity: (product: Product) => void;
   decreaseQuantity: (product: Product) => void;
   removeFromCart: (id: string) => void;
+  confirmCart: (cart: object) => void;
 }
 const cartCookie = getCookie("cart");
 const useCartProducts = create<CartState>()((set, get) => ({
@@ -58,8 +60,17 @@ const useCartProducts = create<CartState>()((set, get) => ({
       }));
     }
     setCookie("cart", JSON.stringify(get().cart));
-
   },
+  confirmCart: async(cart) => {
+    await request.post("payment", cart, {
+      headers: {
+        "Authorization": "Bearer " + getCookie("token")
+      }
+    }).then(res => {
+      toast.success(res.data.msg)
+      set(state => ({...state, cart: []}))
+    })
+  }
 }));
 
 export default useCartProducts;
